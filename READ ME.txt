@@ -1,0 +1,27 @@
+Installer for Black Souls 2 archipelago integration.
+
+Should work with all versions, including steam (though achievements will be disabled).
+
+
+steps:
+
+1. drag everything from the "Game Folder" into your Black Souls 2 directory, replace anything it asks to.
+
+2. run either Launch GUI.bat or BS2_archi_installer.py and follow the instructions there (.exe included for anyone who doesn't feel like installing python) 
+
+3. install the Black Souls 2 apworld located in the apworld folder
+
+4. Put your name into the Yaml File & rename. Place into players folder within archipelago
+
+4. fill archipelago.json (located in game folder) with relevant info (archipelago port & player name)
+
+5. should be all set to connect & play.
+
+if any problems occur feel free to reach out to me on discord @CthulhusShoes
+
+
+
+Credits: archipelago X vx ace connection script & tools -- EggSlashEther
+	 base randomization & installer base -- Alice_Of_Nhility
+	 original bs2 manual apworld -- MayruhiShiinamiya & SpearOfLies
+	 Black Souls 2 integration & archipelago installer -- CthulhusShoes

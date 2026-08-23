@@ -1,0 +1,8 @@
+name: Name_Here
+description: Default template created by the Manual Builder tool
+
+game: black_souls2
+
+black_souls2:
+    progression_balancing: 50
+    accessibility: items
