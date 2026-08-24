@@ -193,8 +193,6 @@ def script_name(entry):
 
 
 def is_our_randomizer(entry):
-    """True if this entry was injected by EITHER mode of this installer.
-    Used so switching modes cleanly replaces rather than stacking scripts."""
     name = script_name(entry).encode("utf-8")
     return any(name.startswith(prefix) for prefix in ALL_NAME_PREFIXES)
 
@@ -373,16 +371,10 @@ class RGSS3AArchive:
         return self.crypt_bytes(encrypted, entry.file_magic)
 
     def replace_entry_by_append(self, entry_name, new_plain_data):
-        """
-        Append the replacement entry and redirect the existing metadata record.
-        This avoids extracting or rewriting every other file in the archive.
-        """
         entry = self.find_entry(entry_name)
         new_magic = DEFAULT_FILE_MAGIC
         encrypted = self.crypt_bytes(new_plain_data, new_magic)
 
-        # Append first. If interrupted before metadata is changed, the old archive
-        # still points to the original data and remains usable.
         with open(self.path, "r+b") as f:
             f.seek(0, os.SEEK_END)
             new_offset = f.tell()
@@ -470,7 +462,6 @@ def validate_game_dir(game_dir, fmt=None):
 def ensure_clean_archive_backup(archive_path):
     backup = archive_path + ARCHIVE_BACKUP_SUFFIX
     if os.path.isfile(backup):
-        # Validate an existing backup before trusting it.
         check = RGSS3AArchive(backup)
         entry = check.find_entry(SCRIPTS_ENTRY_NAME)
         load_scripts_bytes(check.read_entry(entry))
@@ -609,9 +600,13 @@ def install_randomizer(game_dir, fmt):
     matches = [e for e in entries if is_our_randomizer(e)]
     if len(matches) != 1 or zlib.decompress(matches[0][2]) != source:
         raise RuntimeError("Final verification failed after installation.")
-    for target_name, new_source in overwrites:
+    for target_name, new_source, optional in overwrites:
         idx = next((i for i, e in enumerate(entries) if script_name(e) == target_name), None)
-        if idx is None or zlib.decompress(entries[idx][2]) != new_source:
+        if idx is None:
+            if optional:
+                continue  # expected: this overwrite was skipped during patching since the target script didn't exist in this game version
+            raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
+        if zlib.decompress(entries[idx][2]) != new_source:
             raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
 
     extra_files = list(warnings) + copy_archipelago_companion_files(game_dir)
@@ -620,27 +615,6 @@ def install_randomizer(game_dir, fmt):
 
 
 def copy_archipelago_companion_files(game_dir):
-    """
-    Archipelago_Combined.rb needs a few loose files next to Game.exe that
-    this patcher CANNOT generate for you (they're specific to your AP world
-    build and your server connection details):
-
-      - archipelago.json         (hostname/port/name/password -- read by
-                                   get_connect_details at runtime; NOT the
-                                   same archipelago.json as the .apworld's
-                                   manifest, despite the identical filename)
-      - Ruby/archipelago_rb/...  (the actual Ruby gem, required by
-                                   `require 'archipelago_rb'`)
-      - ap_location_pool.json    (the item-name -> ordered-location-list
-                                   table Archipelago_Combined.rb reads at
-                                   runtime; ships alongside this installer if
-                                   present)
-
-    If ap_location_pool.json is bundled next to this installer, copy it in
-    automatically. Everything else just gets flagged as still-needed in the
-    status message -- this function returns what it could NOT do so the UI
-    can tell the user.
-    """
     still_needed = []
 
     pool_src = app_resource("ap_location_pool.json")
