@@ -108,8 +108,7 @@
     "LC: Viper's Clothing"
   ],
   "Ring of Life": [
-    "LC: Ring of Life",
-    "CC: Ring of Life (Cheshire Cat's Gift)"
+    "LC: Ring of Life"
   ],
   "Holy Knight's Shield": [
     "FF: Holy Knight's Shield"
@@ -155,7 +154,8 @@
   ],
   "Spell Stoneplate Ring": [
     "MW: Spell Stoneplate Ring",
-    "LD: Spell Stoneplate Ring (exchange for Soul of the Pregnant Cake)"
+    "LD: Spell Stoneplate Ring (exchange for Soul of the Pregnant Cake)",
+    "LD: Spell Stoneplate Ring (second exchange for Soul of the Pregnant Cake)"
   ],
   "Plate Mail": [
     "MW: Plate Mail"
@@ -189,7 +189,8 @@
   ],
   "Ring of Steel Protection": [
     "LT: Ring of Steel Protection",
-    "LD: Ring of Steel Protection (exchange for Soul of the Gray Eagle)"
+    "LD: Ring of Steel Protection (exchange for Soul of the Gray Eagle)",
+    "LD: Ring of Steel Protection (second exchange for Soul of the Gray Eagle)"
   ],
   "Sorcery [Flame]": [
     "LT: Sorcery [Flame]"
@@ -290,7 +291,8 @@
   ],
   "Ring of Heaven": [
     "OWU: Ring of Heaven",
-    "LD: Ring of Heaven (exchange for Soul of the Bright Star)"
+    "LD: Ring of Heaven (exchange for Soul of the Bright Star)",
+    "LD: Ring of Heaven (second exchange for Soul of the Bright Star)"
   ],
   "Sorcery [Heavy Soul Arrow]": [
     "CR: Sorcery [Heavy Soul Arrow]"
@@ -796,22 +798,22 @@
     "Crimean Nursing Graveyard: Sorcery [Acid Rain]"
   ],
   "Holy Gunblade": [
-    "Winterbell: Holy Gunblade"
+    "LD: Holy Gunblade (exchange for Soul of Florence)"
   ],
   "Unis' Rapier": [
-    "Winterbell: Unis' Rapier"
+    "LD: Unis' Rapier (exchange for Soul of the White Unicorn)"
   ],
   "Leiden's Twin Axes": [
-    "Winterbell: Leiden's Twin Axes"
+    "LD: Leiden's Twin Axes (exchange for Soul of the White Lion)"
   ],
   "Cross Greatshield": [
     "White Castletown: Cross Greatshield"
   ],
   "Guardian Angel": [
-    "Winterbell: Guardian Angel"
+    "LD: Guardian Angel (exchange for Soul of the Wet Nurses)"
   ],
   "Windless Wrap": [
-    "Winterbell: Windless Wrap"
+    "LD: Windless Wrap (exchange for Soul of the Winterbell's Wind)"
   ],
   "Winter Witch's Coat": [
     "White Castletown: Winter Witch's Coat"
@@ -879,5 +881,131 @@
   ],
   "Mystery of Night Sky": [
     "CD: Mystery of Night Sky (Ashes Reignited)"
+  ],
+  "Mist Crash Chamber": [
+    "Crash Chamber: Mist Crash Chamber"
+  ],
+  "Mist Fuming Forest": [
+    "Fuming Forest: Mist Fuming Forest"
+  ],
+  "Mist Spore Forest": [
+    "Spore Forest: Mist Spore Forest"
+  ],
+  "Mist Dodgson Bridge": [
+    "Dodgson Bridge: Mist Dodgson Bridge"
+  ],
+  "Mist Liddell Cemetary": [
+    "Liddell Cemetary: Mist Liddell Cemetary"
+  ],
+  "Mist Pond of Bloody Tears": [
+    "Pond of Bloody Tears: Mist Pond of Bloody Tears"
+  ],
+  "Mist Mental Ward": [
+    "Mental Ward: Mist Mental Ward"
+  ],
+  "Mist Mushroom Village": [
+    "Mushroom Village: Mist Mushroom Village"
+  ],
+  "Mist Library Dream": [
+    "Library Dream: Mist Library Dream"
+  ],
+  "Mist Upper Lutwidge Town": [
+    "Upper Lutwidge Town: Mist Upper Lutwidge Town"
+  ],
+  "Mist Slaughterhouse": [
+    "Slaughterhouse: Mist Slaughterhouse"
+  ],
+  "Mist Billingsgate Fish Market": [
+    "Billingsgate Fish Market: Mist Billingsgate Fish Market"
+  ],
+  "Mist Ox Ward University": [
+    "Ox Ward University: Mist Ox Ward University"
+  ],
+  "Mist Sick Clock Tower": [
+    "Sick Clock Tower: Mist Sick Clock Tower"
+  ],
+  "Mist Jubjub's Nest": [
+    "Jubjub's Nest: Mist Jubjub's Nest"
+  ],
+  "Mist Riverside": [
+    "Riverside: Mist Riverside"
+  ],
+  "Mist Red Castle Frissel": [
+    "Red Castle Frissel: Mist Red Castle Frissel"
+  ],
+  "Mist Duchess' Mansion": [
+    "Duchess' Mansion: Mist Duchess' Mansion"
+  ],
+  "Mist Infinite Food": [
+    "Infinite Food: Mist Infinite Food"
+  ],
+  "Mist Queensland": [
+    "Queensland: Mist Queensland"
+  ],
+  "Mist Deep Sea": [
+    "Deep Sea: Mist Deep Sea"
+  ],
+  "Mist Crimean Nursing Graveyard": [
+    "Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard"
+  ],
+  "Mist Florence Arena": [
+    "Florence Arena: Mist Florence Arena"
+  ],
+  "Mist Windless Valley": [
+    "Windless Valley: Mist Windless Valley"
+  ],
+  "Mist Black Knight Arena": [
+    "Black Knight Arena: Mist Black Knight Arena"
+  ],
+  "Mist White Castletown": [
+    "White Castletown: Mist White Castletown"
+  ],
+  "Soul of the White Unicorn": [
+    "Winterbell: Soul of the White Unicorn"
+  ],
+  "Soul of the White Lion": [
+    "Winterbell: Soul of the White Lion"
+  ],
+  "Mist Jabberwock's Lair": [
+    "Jabberwock's Lair: Mist Jabberwock's Lair"
+  ],
+  "Rotten Scythe Jabberwock": [
+    "LD: Rotten Scythe Jabberwock (exchange for Soul of the Jabberwock)"
+  ],
+  "Mad Bow Jubjub": [
+    "LD: Mad Bow Jubjub (exchange for Soul of the Jubjub)"
+  ],
+  "Deep Sea Knight's Anchor": [
+    "LD: Deep Sea Knight's Anchor (exchange for Soul of the Deep Sea Knight)"
+  ],
+  "Butcher's Chainsaw": [
+    "LD: Butcher's Chainsaw (exchange for Soul of the Butcher)"
+  ],
+  "Violent Sword Bandersnatch": [
+    "LD: Violent Sword Bandersnatch (exchange for Soul of the Bandersnatch)"
+  ],
+  "Porcupine Shield": [
+    "LD: Porcupine Shield (exchange for Soul of Distraction)"
+  ],
+  "Manslayer's Shotgun": [
+    "LD: Manslayer's Shotgun (exchange for Soul of Jack)"
+  ],
+  "Knight of Spades' Ring": [
+    "LD: Knight of Spades' Ring (exchange for Soul of the Knight of Spades)"
+  ],
+  "Knight of Hearts' Ring": [
+    "LD: Knight of Hearts' Ring (exchange for Soul of the Knight of Hearts)"
+  ],
+  "Knight of Clubs' Ring": [
+    "LD: Knight of Clubs' Ring (exchange for Soul of the Knight of Clubs)"
+  ],
+  "God Fish's Ring": [
+    "LD: God Fish's Ring (exchange for Soul of the God's Odd Fish)"
+  ],
+  "Arbiter's Scythe": [
+    "ASH: Arbiter's Scythe"
+  ],
+  "Vorpal Blade": [
+    "LD: Vorpal Blade (exchange for Soul of the Head-Hunting Beast)"
   ]
 }

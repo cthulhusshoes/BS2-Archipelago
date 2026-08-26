@@ -57,9 +57,34 @@
 
     progressive_methods = {}
     receiveditem_methods = {}
-
     $name_based_receiveditem_methods = {
-        "Black Souls 2" => "$game_party.gain_gold(100)",
+        'Mist Crash Chamber' => '$game_switches[1101] = true',
+        'Mist Fuming Forest' => '$game_switches[1102] = true',
+        'Mist Spore Forest' => '$game_switches[1103] = true',
+        'Mist Dodgson Bridge' => '$game_switches[1104] = true',
+        'Mist Liddell Cemetary' => '$game_switches[1105] = true',
+        'Mist Pond of Bloody Tears' => '$game_switches[1106] = true',
+        'Mist Mental Ward' => '$game_switches[1107] = true',
+        'Mist Mushroom Village' => '$game_switches[1108] = true',
+        'Mist Library Dream' => '$game_switches[1109] = true',
+        'Mist Upper Lutwidge Town' => '$game_switches[1110] = true',
+        'Mist Slaughterhouse' => '$game_switches[1111] = true',
+        'Mist Billingsgate Fish Market' => '$game_switches[1112] = true',
+        'Mist Ox Ward University' => '$game_switches[1113] = true',
+        'Mist Sick Clock Tower' => '$game_switches[1114] = true',
+        "Mist Jubjub's Nest" => '$game_switches[1115] = true',
+        'Mist Riverside' => '$game_switches[1116] = true',
+        'Mist Red Castle Frissel' => '$game_switches[1117] = true',
+        "Mist Duchess' Mansion" => '$game_switches[1118] = true',
+        'Mist Infinite Food' => '$game_switches[1119] = true',
+        'Mist Queensland' => '$game_switches[1120] = true',
+        'Mist Deep Sea' => '$game_switches[1121] = true',
+        'Mist Crimean Nursing Graveyard' => '$game_switches[1122] = true',
+        'Mist Florence Arena' => '$game_switches[1123] = true',
+        'Mist Windless Valley' => '$game_switches[1124] = true',
+        'Mist Black Knight Arena' => '$game_switches[1125] = true',
+        'Mist White Castletown' => '$game_switches[1126] = true',
+        "Mist Jabberwock's Lair" => '$game_switches[1127] = true',
     }
 
     $ap_excluded_item_names = [
@@ -563,15 +588,225 @@ module BS2Randomizer
         return nil if DOOR_GROUPS.empty?
         door_map[transfer_key(interpreter, params)]
     end
+
+    #--------------------------------------------------------------------
+    # ** Mist trigger events
+    #--------------------------------------------------------------------
+    MIST_MAP_EVENT_TRIGGERS = {
+        [52, 27] => ['Mist Crash Chamber', 'Crash Chamber: Mist Crash Chamber'],
+        [3, 25] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [65, 5] => ['Mist Pond of Bloody Tears', 'Pond of Bloody Tears: Mist Pond of Bloody Tears'],
+        [69, 55] => ['Mist Mental Ward', 'Mental Ward: Mist Mental Ward'],
+        [38, 51] => ['Mist Spore Forest', 'Spore Forest: Mist Spore Forest'],
+        [79, 12] => ["Mist Duchess' Mansion", "Duchess' Mansion: Mist Duchess' Mansion"],
+        [93, 23] => ['Mist Billingsgate Fish Market', 'Billingsgate Fish Market: Mist Billingsgate Fish Market'],
+        [95, 19] => ['Mist Slaughterhouse', 'Slaughterhouse: Mist Slaughterhouse'],
+        [31, 65] => ['Mist Riverside', 'Riverside: Mist Riverside'],
+        [134, 26] => ['Mist Red Castle Frissel', 'Red Castle Frissel: Mist Red Castle Frissel'],
+        [8, 57] => ['Mist Upper Lutwidge Town', 'Upper Lutwidge Town: Mist Upper Lutwidge Town'],
+        [155, 48] => ['Mist Ox Ward University', 'Ox Ward University: Mist Ox Ward University'],
+        [157, 62] => ['Mist Sick Clock Tower', 'Sick Clock Tower: Mist Sick Clock Tower'],
+        [156, 31] => ["Mist Jubjub's Nest", "Jubjub's Nest: Mist Jubjub's Nest"],
+        [260, 15] => ['Mist Queensland', 'Queensland: Mist Queensland'],
+        [39, 130] => ['Mist Mushroom Village', 'Mushroom Village: Mist Mushroom Village'],
+        [126, 26] => ['Mist Fuming Forest', 'Fuming Forest: Mist Fuming Forest'],
+        [324, 11] => ['Mist Crimean Nursing Graveyard', 'Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard'],
+        [320, 144] => ['Mist Florence Arena', 'Florence Arena: Mist Florence Arena'],
+        [333, 105] => ['Mist Windless Valley', 'Windless Valley: Mist Windless Valley'],
+        [347, 31] => ['Mist Black Knight Arena', 'Black Knight Arena: Mist Black Knight Arena'],
+        [410, 31] => ['Mist White Castletown', 'White Castletown: Mist White Castletown'],
+        [261, 6] => ["Mist Jabberwock's Lair", "Jabberwock's Lair: Mist Jabberwock's Lair"],
+        [152, 82] => ['Mist Library Dream', 'Library Dream: Mist Library Dream'],
+        [33, 110] => ['Mist Liddell Cemetary', 'Liddell Cemetary: Mist Liddell Cemetary'],
+        [139, 70] => ['Mist Deep Sea', 'Deep Sea: Mist Deep Sea'],
+        [42, 79] => ['Mist Infinite Food', 'Infinite Food: Mist Infinite Food'],
+    }
+
+    def self.check_mist_trigger(interpreter)
+        key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
+        return unless MIST_MAP_EVENT_TRIGGERS.key?(key)
+        item_name, location_name = MIST_MAP_EVENT_TRIGGERS[key]
+        ArchipelagoLocations.send_check(location_name)
+    end
+
+    #--------------------------------------------------------------------
+    # ** AP-interception exclusion by event
+    #--------------------------------------------------------------------
+    AP_INTERCEPTION_EXCLUDED_EVENTS = {
+        [101, 5] => true,  # Library Dream weapon upgrade NPC
+        [51, 95] => true,  # Crash Chamber Cheshire Cat's Gift NPC -- whichever gift is chosen must always grant vanilla, never intercepted as an AP check (the only AP-tracked gift option, Ring of Life, already has its own real location elsewhere)
+    }
+
+    def self.excluded_event?(interpreter)
+        key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
+        AP_INTERCEPTION_EXCLUDED_EVENTS.key?(key)
+    end
+
+    #--------------------------------------------------------------------
+    # ** NG+ item preservation
+    #--------------------------------------------------------------------
+    AP_PROTECTED_FROM_REMOVAL = {
+        [101, 11] => ["Train Ticket", "Gate Pass", "Edith's Ring",
+                       "Silver Ring of Avarice", "Golden Ring of Avarice"],
+    }
+
+    def self.protected_from_removal?(interpreter, kind, id)
+        key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
+        names = AP_PROTECTED_FROM_REMOVAL[key]
+        return false unless names
+        names.include?(display_name(kind, id))
+    end
+
+    #--------------------------------------------------------------------
+    # ** Mist fog wall barriers
+    #--------------------------------------------------------------------
+    MIST_FOG_WALL_TRIGGERS = {
+        [52, 22] => 1101,
+        [181, 6] => 1109,
+        [58, 8] => 1104, [58, 9] => 1104, [58, 10] => 1104,
+        [33, 72] => 1105,
+        [65, 60] => 1106,
+        [85, 2] => 1107,
+        [73, 14] => 1103,
+        [79, 14] => 1118, [79, 15] => 1118, [79, 16] => 1118,
+        [93, 13] => 1112,
+        [105, 16] => 1111,
+        [108, 9] => 1116, [108, 10] => 1116, [108, 11] => 1116,
+        [143, 43] => 1117, [143, 44] => 1117, [143, 42] => 1117,
+        [153, 18] => 1110,
+        [149, 6] => 1113,
+        [158, 9] => 1114,
+        [43, 9] => 1115,
+        [170, 16] => 1120,
+        [40, 11] => 1108,
+        [83, 30] => 1119,
+        [141, 8] => 1121,
+        [127, 28] => 1102,
+        [328, 23] => 1122,
+        [329, 110] => 1123,
+        [344, 8] => 1124,
+        [350, 4] => 1125,
+        [351, 13] => 1126,
+        [109, 8] => 1127,
+    }
+
+    def self.mist_fog_wall_switch(map_id, event_id)
+        MIST_FOG_WALL_TRIGGERS[[map_id, event_id]]
+    end
+
+    #--------------------------------------------------------------------
+    # ** Boss soul grants via battle victory
+    #--------------------------------------------------------------------
+    BOSS_SOUL_TROOP_TRIGGERS = {
+        291 => [["Arbiter's Scythe", "ASH: Arbiter's Scythe"]],
+        174 => [['Soul of the Head-Hunting Beast', 'CC: Soul of the Head-Hunting Beast']],
+        175 => [['Soul of Distraction', 'LT: Soul of Distraction']],
+        178 => [['Soul of the Pregnant Cake', 'IF: Soul of the Pregnant Cake']],
+        179 => [['Soul of the Bellcaller', 'BFM: Soul of the Bellcaller']],
+        180 => [['Soul of the Butcher', 'SH: Soul of the Butcher']],
+        181 => [['Soul of the Gray Eagle', 'MW: Soul of the Gray Eagle']],
+        182 => [['Soul of Conceit', 'CR: Soul of Conceit']],
+        183 => [['Soul of Jack', 'ULT: Soul of Jack']],
+        185 => [['Soul of the Dean', 'OWU: Soul of the Dean']],
+        186 => [
+            ['Soul of the Knight of Hearts', 'RCF: Soul of the Knight of Hearts'],
+            ['Soul of the Knight of Spades', 'RCF: Soul of the Knight of Spades'],
+            ['Soul of the Knight of Clubs', 'RCF: Soul of the Knight of Clubs'],
+        ],
+        187 => [['Soul of the Bright Star', 'SCT: Soul of the Bright Star']],
+        192 => [['Soul of the Old Knight', 'SF: Soul of the Old Knight']],
+        195 => [["Soul of the Giant's Home", "MV: Soul of the Giant's Home"]],
+        214 => [['Soul of the Slave Emperor', 'QL: Soul of the Slave Emperor']],
+        218 => [['Soul of the Jubjub', 'SCT: Soul of the Jubjub']],
+        220 => [['Soul of the Jabberwock', 'CR: Soul of the Jabberwock']],
+        373 => [['Soul of the Jabberwock', 'CR: Soul of the Jabberwock']],
+        222 => [['Soul of Queen of Torture Tools', 'PoBT: Soul of Queen of Torture Tools']],
+        216 => [['Soul of the Bandersnatch', 'FF: Soul of the Bandersnatch']],
+        331 => [["Soul of the God's Odd Fish", "Ship Graveyard: Soul of the God's Odd Fish"]],
+        341 => [['Soul of the Deep Sea Knight', 'DS: Soul of the Deep Sea Knight']],
+        544 => [["Soul of the Winterbell's Wind", "White Castletown: Soul of the Winterbell's Wind"]],
+        568 => [['Soul of the Wet Nurses', 'Crimean Nursing Graveyard: Soul of the Wet Nurses']],
+        569 => [['Soul of Florence', 'Crimean Nursing Graveyard: Soul of Florence']],
+        614 => [['Soul of the White Unicorn', 'Winterbell: Soul of the White Unicorn']],
+        616 => [['Soul of the White Lion', 'Winterbell: Soul of the White Lion']],
+    }
+
+    def self.grant_boss_souls_for_troop(troop_id)
+        pairs = BOSS_SOUL_TROOP_TRIGGERS[troop_id]
+        return unless pairs
+        pairs.each { |item_name, location_name| ArchipelagoLocations.send_check(location_name) }
+    end
+
+    #--------------------------------------------------------------------
+    # ** Shop item randomization
+    #--------------------------------------------------------------------
+    def self.shop_replacement_pool
+        return @shop_replacement_pool if @shop_replacement_pool
+        @shop_replacement_pool = []
+        [[$data_items, 0, "item"], [$data_weapons, 1, "weapon"], [$data_armors, 2, "armor"]].each do |data, type_code, kind|
+            next unless data
+            data.each_with_index do |obj, id|
+                next if id == 0 || obj.nil?
+                next if obj.name.to_s.strip.empty?  # skip blank/ghost database entries
+                next if excluded_by_name?(kind, id)
+                next if has_ap_location?(kind, id)
+                @shop_replacement_pool << [type_code, id]
+            end
+        end
+        @shop_replacement_pool
+    end
+
+    def self.shop_entry_original_price(entry)
+        type_code, item_id, price_type, price = entry
+        return price if price_type == 1
+        data = case type_code
+               when 0 then $data_items[item_id]
+               when 1 then $data_weapons[item_id]
+               when 2 then $data_armors[item_id]
+               end
+        data ? data.price : 0
+    end
+
+    def self.shuffled_shop_entry(entry)
+        pool = shop_replacement_pool
+        return entry if pool.empty?
+        type_code, item_id = entry[0], entry[1]
+        key = "shop:#{type_code}:#{item_id}"
+        replacement = pick(pool, key)
+        return entry unless replacement
+        new_type, new_id = replacement
+        [new_type, new_id, 1, shop_entry_original_price(entry)]
+    end
 end
+
+module BattleManager
+    class << self
+        alias bs2ap_process_victory process_victory
+        def process_victory
+            troop_id = $game_troop.instance_variable_get(:@troop_id) if defined?($game_troop) && $game_troop
+            BS2Randomizer.grant_boss_souls_for_troop(troop_id) if troop_id
+            bs2ap_process_victory
+        end
+    end
+end
+
+class Game_Event < Game_Character
+    alias bs2ap_event_start start
+    def start
+        switch_id = BS2Randomizer.mist_fog_wall_switch($game_map.map_id, @id)
+        if switch_id && !$game_switches[switch_id]
+            $game_message.add("The fog is too dense to push through here.")
+            return
+        end
+        bs2ap_event_start
+    end
+end
+
 
 #==============================================================================
 # ** AP location-check dispatch + item receiving
 #==============================================================================
 module ArchipelagoLocations
-    # Name<->id lookups, built directly from the server's DataPackage reply
-    # (standard AP network protocol) rather than any archipelago_rb-specific
-    # accessor -- this avoids depending on that gem's exact internal API.
     $ap_item_id_to_name = {}
     $ap_location_name_to_id = {}
 
@@ -675,17 +910,34 @@ class Game_Interpreter
     alias bs2r4_command_121 command_121
 
     #--------------------------------------------------------------------
+    # ** Endings / goal
     #--------------------------------------------------------------------
-    TRUE_ENDING_MAP_ID = 391
-    TRUE_ENDING_EVENT_ID = 2
-    TRUE_ENDING_SWITCH_ID = 792
+    ENDING_TRIGGERS = {
+        "true_ending" => [
+            {map_id: 391, event_id: 2, switch_id: 792},
+        ],
+        "good_ending" => [
+            {map_id: 187, event_id: 6, switch_id: 513},
+        ],
+        "common_endings" => [
+            {map_id: 175, event_id: 6, switch_id: 507},  # A Ending
+            {map_id: 175, event_id: 6, switch_id: 509},  # C Ending
+            {map_id: 175, event_id: 6, switch_id: 510},  # D Ending
+            {map_id: 175, event_id: 6, switch_id: 511},  # E Ending
+        ],
+        "ending_f" => [
+            {map_id: 179, event_id: 3, switch_id: 512},  # F Ending
+        ],
+    }
     AP_CLIENT_STATUS_GOAL = 30
 
     def command_121
-        if BS2Randomizer.map_id(self) == TRUE_ENDING_MAP_ID &&
-           instance_variable_get(:@event_id) == TRUE_ENDING_EVENT_ID &&
-           @params[0] <= TRUE_ENDING_SWITCH_ID && TRUE_ENDING_SWITCH_ID <= @params[1] &&
-           @params[2] == 0 # 0 = ON, 1 = OFF
+        triggers = ENDING_TRIGGERS[$ap_goal] || []
+        triggers.each do |trigger|
+            next unless BS2Randomizer.map_id(self) == trigger[:map_id]
+            next unless instance_variable_get(:@event_id) == trigger[:event_id]
+            next unless @params[0] <= trigger[:switch_id] && trigger[:switch_id] <= @params[1]
+            next unless @params[2] == 0 # 0 = ON, 1 = OFF
             if $archipelago && $archipelago.client_connect_status == Archipelago::ConnectStatus::CONNECTED
                 $archipelago.update_status(AP_CLIENT_STATUS_GOAL)
                 $archipelago.say("!release")
@@ -728,85 +980,119 @@ class Game_Interpreter
 
 
     def command_126
-        if !BS2Randomizer.intro_map?(self) && !BS2Randomizer.never_shuffle_item?(@params[0]) &&
-           !BS2Randomizer.protected_bloody_key?(self, @params) &&
-           !BS2Randomizer.excluded_by_name?("item", @params[0])
+        BS2Randomizer.check_mist_trigger(self)
+        if BS2Randomizer.protected_from_removal?(self, "item", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
-            if value > 0
-                name = BS2Randomizer.ap_location_name("item", BS2Randomizer.map_id(self), @params[0].to_i)
-                if name
-                    ArchipelagoLocations.send_check(name)
-                    return true
-                end
-                if BS2Randomizer.region_pool("item", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
-                    shuffled = BS2Randomizer.shuffled_non_ap_item_id("item", BS2Randomizer.map_id(self), @params[0].to_i)
-                    if shuffled != @params[0].to_i
-                        original = @params
-                        @params = [shuffled, @params[1], @params[2], @params[3]]
-                        begin
-                            return bs2r4_command_126
-                        ensure
-                            @params = original
+            return true if value < 0
+        end
+        excluded = BS2Randomizer.excluded_event?(self)
+        $ap_excluded_event_grant = true if excluded
+        begin
+            if !BS2Randomizer.intro_map?(self) && !BS2Randomizer.never_shuffle_item?(@params[0]) &&
+               !BS2Randomizer.protected_bloody_key?(self, @params) &&
+               !excluded &&
+               !BS2Randomizer.excluded_by_name?("item", @params[0])
+                value = operate_value(@params[1], @params[2], @params[3])
+                if value > 0
+                    name = BS2Randomizer.ap_location_name("item", BS2Randomizer.map_id(self), @params[0].to_i)
+                    if name
+                        ArchipelagoLocations.send_check(name)
+                        return true
+                    end
+                    if BS2Randomizer.region_pool("item", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
+                        shuffled = BS2Randomizer.shuffled_non_ap_item_id("item", BS2Randomizer.map_id(self), @params[0].to_i)
+                        if shuffled != @params[0].to_i
+                            original = @params
+                            @params = [shuffled, @params[1], @params[2], @params[3]]
+                            begin
+                                return bs2r4_command_126
+                            ensure
+                                @params = original
+                            end
                         end
                     end
+                    # No AP location and no shuffle target -- fall through to
+                    # vanilla grant rather than silently dropping the item.
                 end
-                # No AP location and no shuffle target -- fall through to
-                # vanilla grant rather than silently dropping the item.
             end
+            bs2r4_command_126
+        ensure
+            $ap_excluded_event_grant = false if excluded
         end
-        bs2r4_command_126
     end
 
     def command_127
-        if !BS2Randomizer.intro_map?(self) && !BS2Randomizer.excluded_by_name?("weapon", @params[0])
+        BS2Randomizer.check_mist_trigger(self)
+        if BS2Randomizer.protected_from_removal?(self, "weapon", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
-            if value > 0
-                name = BS2Randomizer.ap_location_name("weapon", BS2Randomizer.map_id(self), @params[0].to_i)
-                if name
-                    ArchipelagoLocations.send_check(name)
-                    return true
-                end
-                if BS2Randomizer.region_pool("weapon", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
-                    shuffled = BS2Randomizer.shuffled_non_ap_item_id("weapon", BS2Randomizer.map_id(self), @params[0].to_i)
-                    if shuffled != @params[0].to_i
-                        original = @params
-                        @params = [shuffled, @params[1], @params[2], @params[3], @params[4]]
-                        begin
-                            return bs2r4_command_127
-                        ensure
-                            @params = original
+            return true if value < 0
+        end
+        excluded = BS2Randomizer.excluded_event?(self)
+        $ap_excluded_event_grant = true if excluded
+        begin
+            if !BS2Randomizer.intro_map?(self) && !excluded && !BS2Randomizer.excluded_by_name?("weapon", @params[0])
+                value = operate_value(@params[1], @params[2], @params[3])
+                if value > 0
+                    name = BS2Randomizer.ap_location_name("weapon", BS2Randomizer.map_id(self), @params[0].to_i)
+                    if name
+                        ArchipelagoLocations.send_check(name)
+                        return true
+                    end
+                    if BS2Randomizer.region_pool("weapon", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
+                        shuffled = BS2Randomizer.shuffled_non_ap_item_id("weapon", BS2Randomizer.map_id(self), @params[0].to_i)
+                        if shuffled != @params[0].to_i
+                            original = @params
+                            @params = [shuffled, @params[1], @params[2], @params[3], @params[4]]
+                            begin
+                                return bs2r4_command_127
+                            ensure
+                                @params = original
+                            end
                         end
                     end
                 end
             end
+            bs2r4_command_127
+        ensure
+            $ap_excluded_event_grant = false if excluded
         end
-        bs2r4_command_127
     end
 
     def command_128
-        if !BS2Randomizer.intro_map?(self) && !BS2Randomizer.excluded_by_name?("armor", @params[0])
+        BS2Randomizer.check_mist_trigger(self)
+        if BS2Randomizer.protected_from_removal?(self, "armor", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
-            if value > 0
-                name = BS2Randomizer.ap_location_name("armor", BS2Randomizer.map_id(self), @params[0].to_i)
-                if name
-                    ArchipelagoLocations.send_check(name)
-                    return true
-                end
-                if BS2Randomizer.region_pool("armor", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
-                    shuffled = BS2Randomizer.shuffled_non_ap_item_id("armor", BS2Randomizer.map_id(self), @params[0].to_i)
-                    if shuffled != @params[0].to_i
-                        original = @params
-                        @params = [shuffled, @params[1], @params[2], @params[3], @params[4]]
-                        begin
-                            return bs2r4_command_128
-                        ensure
-                            @params = original
+            return true if value < 0
+        end
+        excluded = BS2Randomizer.excluded_event?(self)
+        $ap_excluded_event_grant = true if excluded
+        begin
+            if !BS2Randomizer.intro_map?(self) && !excluded && !BS2Randomizer.excluded_by_name?("armor", @params[0])
+                value = operate_value(@params[1], @params[2], @params[3])
+                if value > 0
+                    name = BS2Randomizer.ap_location_name("armor", BS2Randomizer.map_id(self), @params[0].to_i)
+                    if name
+                        ArchipelagoLocations.send_check(name)
+                        return true
+                    end
+                    if BS2Randomizer.region_pool("armor", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
+                        shuffled = BS2Randomizer.shuffled_non_ap_item_id("armor", BS2Randomizer.map_id(self), @params[0].to_i)
+                        if shuffled != @params[0].to_i
+                            original = @params
+                            @params = [shuffled, @params[1], @params[2], @params[3], @params[4]]
+                            begin
+                                return bs2r4_command_128
+                            ensure
+                                @params = original
+                            end
                         end
                     end
                 end
             end
+            bs2r4_command_128
+        ensure
+            $ap_excluded_event_grant = false if excluded
         end
-        bs2r4_command_128
     end
 end
 
@@ -815,7 +1101,9 @@ end
 class Scene_Shop < Scene_MenuBase
     alias bs2r5_prepare prepare
     def prepare(goods, purchase_only)
-        return bs2r5_prepare(goods, purchase_only) unless BS2Randomizer.enabled?("shop_item_randomization")
+        if BS2Randomizer.enabled?("shop_item_randomization")
+            goods = goods.map { |entry| BS2Randomizer.shuffled_shop_entry(entry) }
+        end
         bs2r5_prepare(goods, purchase_only)
     end
 end
@@ -839,7 +1127,7 @@ end
 class Game_Party < Game_Unit
     alias bs2ap_gain_item gain_item
     def gain_item(item, amount, include_equip = false)
-        if item && amount > 0 && !$ap_giving && !$ap_equip_transfer
+        if item && amount > 0 && !$ap_giving && !$ap_equip_transfer && !$ap_excluded_event_grant
             kind = case item
                    when RPG::Item   then "item"
                    when RPG::Weapon then "weapon"
@@ -875,6 +1163,7 @@ end
         $archipelago.add_listener("DataPackage") { |msg| ArchipelagoLocations.ingest_datapackage(msg) }
 
         $archipelago.add_listener("Connected") do |msg|
+            $ap_goal = (msg["slot_data"] || {})["goal"] || "true_ending"
             ArchipelagoLocations.request_datapackage!
             Thread.new do
                 loop do
@@ -977,17 +1266,6 @@ end
             $game_player        = contents[:player]
             if $load_autoconnect && contents[:AP_connect_info]
                 $archipelago.connect_info = contents[:AP_connect_info]
-                # Hosted rooms can change port between sessions even when
-                # it's the "same" room (confirmed happening in practice --
-                # 59042 -> 41067) -- but the save's embedded connect_info
-                # still has the OLD port baked in from whenever it was
-                # saved, causing ECONNRESET on reconnect. Always re-read
-                # hostname/port fresh from archipelago.json (the file you'd
-                # actually update with a room's current real values)
-                # instead of trusting the save's potentially-stale copy.
-                # name/password are far less likely to change session to
-                # session, so those still come from the save for
-                # continuity.
                 config_path = File.join(Dir.pwd, "archipelago.json")
                 if File.exist?(config_path)
                     config = JSON.parse(File.read(config_path))
