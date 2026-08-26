@@ -699,6 +699,9 @@ module BS2Randomizer
     #--------------------------------------------------------------------
     BOSS_SOUL_TROOP_TRIGGERS = {
         291 => [["Arbiter's Scythe", "ASH: Arbiter's Scythe"]],
+		30 => [['Fairy Tale Scrap Two', 'LT: Fairy Tale Scrap Two']],
+        31 => [['Fairy Tale Scrap One', 'ULT: Fairy Tale Scrap One']],
+        32 => [['Fairy Tale Scrap Three', 'LT: Fairy Tale Scrap Three']],
         174 => [['Soul of the Head-Hunting Beast', 'CC: Soul of the Head-Hunting Beast']],
         175 => [['Soul of Distraction', 'LT: Soul of Distraction']],
         178 => [['Soul of the Pregnant Cake', 'IF: Soul of the Pregnant Cake']],
