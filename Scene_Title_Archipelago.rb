@@ -114,7 +114,6 @@ class Scene_Title < Scene_Base
     fadeout_all
     $game_map.autoplay
     $archipelago.get_connect
-    SceneManager.call(Scene_APConnectInput)
   end
   #--------------------------------------------------------------------------
   # ● コマンド［コンティニュー］

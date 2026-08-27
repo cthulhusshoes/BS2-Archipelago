@@ -57,6 +57,7 @@
 
     progressive_methods = {}
     receiveditem_methods = {}
+
     $name_based_receiveditem_methods = {
         'Mist Crash Chamber' => '$game_switches[1101] = true',
         'Mist Fuming Forest' => '$game_switches[1102] = true',
@@ -351,8 +352,6 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
-    # AP-facing location naming. MUST match generate_manual_apworld.py's
-    # location_name()/KIND_LABELS exactly.
     #--------------------------------------------------------------------
     KIND_LABELS = { "item" => "Item", "weapon" => "Weapon", "armor" => "Armor" }
 
@@ -699,7 +698,7 @@ module BS2Randomizer
     #--------------------------------------------------------------------
     BOSS_SOUL_TROOP_TRIGGERS = {
         291 => [["Arbiter's Scythe", "ASH: Arbiter's Scythe"]],
-		30 => [['Fairy Tale Scrap Two', 'LT: Fairy Tale Scrap Two']],
+        30 => [['Fairy Tale Scrap Two', 'LT: Fairy Tale Scrap Two']],
         31 => [['Fairy Tale Scrap One', 'ULT: Fairy Tale Scrap One']],
         32 => [['Fairy Tale Scrap Three', 'LT: Fairy Tale Scrap Three']],
         174 => [['Soul of the Head-Hunting Beast', 'CC: Soul of the Head-Hunting Beast']],
@@ -911,6 +910,29 @@ class Game_Interpreter
     alias bs2r4_command_127 command_127
     alias bs2r4_command_128 command_128
     alias bs2r4_command_121 command_121
+    alias bs2r6_command_117 command_117
+
+    #--------------------------------------------------------------------
+    # ** DeathLink -- broadcast on local death
+    #--------------------------------------------------------------------
+    DEATH_LINK_COMMON_EVENT_ID = 11
+
+    def command_117
+        if @params[0] == DEATH_LINK_COMMON_EVENT_ID && $ap_death_link_enabled &&
+           $archipelago && $archipelago.client_connect_status == Archipelago::ConnectStatus::CONNECTED
+            deathlink_packet = [{
+                cmd: "Bounce",
+                tags: ["DeathLink"],
+                data: {
+                    time: Time.now.to_i,
+                    source: $archipelago.connect_info["name"],
+                    cause: "#{$archipelago.connect_info['name']} died.",
+                },
+            }].to_json
+            $archipelago.client_socket.send(deathlink_packet)
+        end
+        bs2r6_command_117
+    end
 
     #--------------------------------------------------------------------
     # ** Endings / goal
@@ -1163,15 +1185,31 @@ end
         $archipelago.connect_info["tags"] = $ap_tags
 
         unhandled_items = Queue.new
+        pending_deathlinks = Queue.new
         $archipelago.add_listener("DataPackage") { |msg| ArchipelagoLocations.ingest_datapackage(msg) }
 
         $archipelago.add_listener("Connected") do |msg|
             $ap_goal = (msg["slot_data"] || {})["goal"] || "true_ending"
+            $ap_death_link_enabled = (msg["slot_data"] || {})["death_link"] == true
+            if $ap_death_link_enabled && !$ap_tags.include?("DeathLink")
+                $ap_tags << "DeathLink"
+                connect_update_packet = [{
+                    cmd: "ConnectUpdate",
+                    tags: $ap_tags,
+                    items_handling: $archipelago_items_handling,
+                }].to_json
+                $archipelago.client_socket.send(connect_update_packet)
+            end
             ArchipelagoLocations.request_datapackage!
             Thread.new do
                 loop do
                     ready = $receive_items_outside_map || SceneManager.scene_is?(Scene_Map)
                     if ready
+                        if !pending_deathlinks.empty? && defined?($game_map) && $game_map &&
+                           $game_map.interpreter && !$game_map.interpreter.running?
+                            pending_deathlinks.pop(true) rescue nil
+                            $game_map.interpreter.setup($data_common_events[Game_Interpreter::DEATH_LINK_COMMON_EVENT_ID].list)
+                        end
                         item = unhandled_items.pop(true) rescue nil
                         if item
                             unless $ap_datapackage_ready
@@ -1214,6 +1252,16 @@ end
                     $receiveditems_index += 1
                 end
                 item_counter += 1
+            end
+        end
+
+        #--------------------------------------------------------------------
+        # DeathLink
+        #--------------------------------------------------------------------
+        $archipelago.add_listener("Bounced") do |msg|
+            if $ap_death_link_enabled && msg["tags"] && msg["tags"].include?("DeathLink") &&
+               msg["data"] && msg["data"]["source"] != $archipelago.connect_info["name"]
+                pending_deathlinks.push(true)
             end
         end
 
