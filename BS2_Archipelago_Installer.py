@@ -14,14 +14,17 @@ SCRIPTS_ENTRY_NAME = "data/scripts.rvdata2"
 RGSS3A_HEADER = b"RGSSAD\x00\x03"
 DEFAULT_FILE_MAGIC = 0xDEADCAFE
 
+
 FORMAT_RGSS3A = "rgss3a"
 FORMAT_RVDATA2 = "rvdata2"
 RVDATA2_RELATIVE_PATH = os.path.join("Data", "Scripts.rvdata2")
 RVDATA2_BACKUP_SUFFIX = ".bs2randomizer_backup"
 
+
 SOURCE_FILENAME = "Archipelago_Combined.rb"
 MOD_NAME = b"Archipelago Combined v1.0"
 NAME_PREFIX = b"Archipelago Combined"
+
 ALL_NAME_PREFIXES = [NAME_PREFIX, b"BS2 Simple Randomizer"]
 
 DEFAULTS = {
@@ -193,11 +196,18 @@ def script_name(entry):
 
 
 def is_our_randomizer(entry):
+    """True if this entry was injected by EITHER mode of this installer.
+    Used so switching modes cleanly replaces rather than stacking scripts."""
     name = script_name(entry).encode("utf-8")
     return any(name.startswith(prefix) for prefix in ALL_NAME_PREFIXES)
 
 
-def patch_scripts_bytes(original_data, source, mod_name, overwrites=None, warnings=None):
+def patch_scripts_bytes(original_data, source, mod_name, overwrites=None):
+    """overwrites: optional list of (target_script_name, new_source_bytes)
+    or (target_script_name, new_source_bytes, required) tuples to apply
+    via overwrite_named_script_entry, in the SAME pass as the main mod
+    injection, so one verification step covers both. required defaults
+    to True (matches the previous, always-strict behavior) when omitted."""
     entries = load_scripts_bytes(original_data)
     clean = [e for e in entries if not is_our_randomizer(e)]
     main_idx = next((i for i, e in enumerate(clean) if script_name(e) == "Main"), None)
@@ -205,21 +215,12 @@ def patch_scripts_bytes(original_data, source, mod_name, overwrites=None, warnin
         raise RuntimeError("Could not find the 'Main' script entry inside Scripts.rvdata2.")
     clean.insert(main_idx, [98941041, mod_name, zlib.compress(source, 9)])
 
-    applied_overwrites = []
-    for entry in (overwrites or []):
-        target_name, new_source, optional = entry if len(entry) == 3 else (entry[0], entry[1], False)
-        exists = any(script_name(e) == target_name for e in clean)
-        if not exists and optional:
-            if warnings is not None:
-                warnings.append(
-                    f"No script entry named {target_name!r} was found in this game's "
-                    "script list -- this overwrite was skipped. This is expected on "
-                    "some game versions/releases (e.g. DLsite builds lacking Steam-only "
-                    "scripts) and is not an error."
-                )
-            continue
-        clean = overwrite_named_script_entry(clean, target_name, new_source)
-        applied_overwrites.append((target_name, new_source))
+    normalized_overwrites = [
+        (t[0], t[1], t[2] if len(t) > 2 else True) for t in (overwrites or [])
+    ]
+
+    for target_name, new_source, required in normalized_overwrites:
+        clean = overwrite_named_script_entry(clean, target_name, new_source, required=required)
 
     patched = save_scripts_bytes(clean)
 
@@ -227,9 +228,13 @@ def patch_scripts_bytes(original_data, source, mod_name, overwrites=None, warnin
     matches = [e for e in verify if is_our_randomizer(e)]
     if len(matches) != 1 or zlib.decompress(matches[0][2]) != source:
         raise RuntimeError("Verification failed after creating patched Scripts.rvdata2.")
-    for target_name, new_source in applied_overwrites:
+    for target_name, new_source, required in normalized_overwrites:
         idx = next((i for i, e in enumerate(verify) if script_name(e) == target_name), None)
-        if idx is None or zlib.decompress(verify[idx][2]) != new_source:
+        if idx is None:
+            if required:
+                raise RuntimeError(f"Verification failed for overwritten script {target_name!r}.")
+            continue  # legitimately absent and optional -- nothing to verify
+        if zlib.decompress(verify[idx][2]) != new_source:
             raise RuntimeError(f"Verification failed for overwritten script {target_name!r}.")
     return patched
 
@@ -240,9 +245,25 @@ def clean_scripts_bytes(original_data):
     return save_scripts_bytes(clean)
 
 
-def overwrite_named_script_entry(entries, target_name, new_source):
+def overwrite_named_script_entry(entries, target_name, new_source, required=True):
+    """
+    Replaces an EXISTING script entry's content in place (keeping its
+    original id and name), rather than inserting a new entry. Used for
+    things like overwriting the vanilla Scene_Title to add the Archipelago
+    connect call -- unlike the main mod injection, this touches a script
+    that's already part of the game, so by default it must exist or this
+    raises.
+
+    required=False makes a missing target a silent no-op instead: some
+    overwrites (steam_acheivement) only apply to specific distributions
+    (Steam builds) and are legitimately absent elsewhere (DLsite builds
+    never had Steam integration to begin with) -- for those, a missing
+    target isn't a problem to report, it's the expected, correct state.
+    """
     idx = next((i for i, e in enumerate(entries) if script_name(e) == target_name), None)
     if idx is None:
+        if not required:
+            return entries
         raise RuntimeError(
             f"Could not find an existing script entry named {target_name!r} to overwrite. "
             "The game's script list may use a different name for this script."
@@ -253,9 +274,6 @@ def overwrite_named_script_entry(entries, target_name, new_source):
 
 
 # -----------------------------------------------------------------------------
-# RGSS3A version 3 archive access
-# Only the embedded Scripts.rvdata2 entry is decrypted/re-encrypted.
-# Other archive data is never extracted.
 # -----------------------------------------------------------------------------
 
 class RGSS3AEntry:
@@ -371,9 +389,14 @@ class RGSS3AArchive:
         return self.crypt_bytes(encrypted, entry.file_magic)
 
     def replace_entry_by_append(self, entry_name, new_plain_data):
+        """
+        Append the replacement entry and redirect the existing metadata record.
+        This avoids extracting or rewriting every other file in the archive.
+        """
         entry = self.find_entry(entry_name)
         new_magic = DEFAULT_FILE_MAGIC
         encrypted = self.crypt_bytes(new_plain_data, new_magic)
+
 
         with open(self.path, "r+b") as f:
             f.seek(0, os.SEEK_END)
@@ -452,7 +475,7 @@ def validate_game_dir(game_dir, fmt=None):
                 "game folder, or switch the format to Steam if that's what you have."
             )
         with open(rvdata2, "rb") as f:
-            load_scripts_bytes(f.read())  # validates it's readable Marshal data
+            load_scripts_bytes(f.read())  
     else:
         raise ValueError(f"Unknown format: {fmt!r}")
 
@@ -468,6 +491,7 @@ def ensure_clean_archive_backup(archive_path):
         return backup
 
     shutil.copy2(archive_path, backup)
+
 
     check = RGSS3AArchive(backup)
     entry = check.find_entry(SCRIPTS_ENTRY_NAME)
@@ -490,7 +514,7 @@ def ensure_clean_rvdata2_backup(rvdata2_path):
     backup = rvdata2_path + RVDATA2_BACKUP_SUFFIX
     if os.path.isfile(backup):
         with open(backup, "rb") as f:
-            load_scripts_bytes(f.read())  # validate it's readable
+            load_scripts_bytes(f.read())  
         return backup
 
     shutil.copy2(rvdata2_path, backup)
@@ -533,7 +557,7 @@ def read_backup_original_scripts(fmt, backup_path):
 SCENE_TITLE_ENTRY_NAME = "Scene_Title"
 SCENE_TITLE_OVERWRITE_FILENAME = "Scene_Title_Archipelago.rb"
 
-STEAM_ACHIEVEMENT_ENTRY_NAME = "steam_acheivement"
+STEAM_ACHIEVEMENT_ENTRY_NAME = "steam_acheivement"  
 STEAM_ACHIEVEMENT_STUB_FILENAME = "steam_acheivement_stub.rb"
 
 
@@ -550,10 +574,15 @@ def install_randomizer(game_dir, fmt):
     overwrites = []
     warnings = []
 
+    backup = ensure_clean_backup(game_dir, fmt)
+    original_scripts = read_backup_original_scripts(fmt, backup)
+    original_entries = load_scripts_bytes(original_scripts)
+    original_names = {script_name(e) for e in original_entries}
+
     scene_title_path = app_resource(SCENE_TITLE_OVERWRITE_FILENAME)
     if os.path.isfile(scene_title_path):
         with open(scene_title_path, "rb") as f:
-            overwrites.append((SCENE_TITLE_ENTRY_NAME, f.read(), False))  # required: this is a core script every version must have
+            overwrites.append((SCENE_TITLE_ENTRY_NAME, f.read()))
     else:
         warnings.append(
             f"{SCENE_TITLE_OVERWRITE_FILENAME} was not bundled with this installer -- "
@@ -562,23 +591,30 @@ def install_randomizer(game_dir, fmt):
 
     steam_stub_path = app_resource(STEAM_ACHIEVEMENT_STUB_FILENAME)
     if os.path.isfile(steam_stub_path):
-        with open(steam_stub_path, "rb") as f:
-            overwrites.append((STEAM_ACHIEVEMENT_ENTRY_NAME, f.read(), True))  # optional: absent on non-Steam releases (e.g. DLsite), which is fine -- there's nothing to fix there
+        if STEAM_ACHIEVEMENT_ENTRY_NAME in original_names:
+            with open(steam_stub_path, "rb") as f:
+                overwrites.append((STEAM_ACHIEVEMENT_ENTRY_NAME, f.read(), False))
+        else:
+            # Not every distribution has Steam integration to begin with
+            # (DLsite builds never had a steam_acheivement script at all)
+            # -- that's the expected, correct state for those, not a
+            # problem, so this is an informational note rather than a
+            # warning the person needs to act on.
+            warnings.append(
+                f"No '{STEAM_ACHIEVEMENT_ENTRY_NAME}' script found in this game's script list -- "
+                "this is normal for non-Steam distributions (e.g. DLsite), which never had Steam "
+                "integration to patch. Nothing to do here."
+            )
     else:
         warnings.append(
             f"{STEAM_ACHIEVEMENT_STUB_FILENAME} was not bundled -- steam_acheivement was left "
-            "as-is and may still throw the Win32API TypeError on Steam installs."
+            "as-is and may still throw the Win32API TypeError."
         )
 
-    backup = ensure_clean_backup(game_dir, fmt)
-    original_scripts = read_backup_original_scripts(fmt, backup)
-    patched_scripts = patch_scripts_bytes(original_scripts, source, MOD_NAME, overwrites, warnings)
+    patched_scripts = patch_scripts_bytes(original_scripts, source, MOD_NAME, overwrites)
 
     if fmt == FORMAT_RGSS3A:
         archive_path = os.path.join(game_dir, ARCHIVE_NAME)
-        # Always start an install/update from the clean backup. This prevents
-        # the archive growing every time the user changes settings or updates
-        # the mod.
         shutil.copy2(backup, archive_path)
         archive = RGSS3AArchive(archive_path)
         archive.replace_entry_by_append(SCRIPTS_ENTRY_NAME, patched_scripts)
@@ -595,17 +631,18 @@ def install_randomizer(game_dir, fmt):
             actual = f.read()
         target_path = rvdata2_path
 
-    # Verify injection regardless of format.
     entries = load_scripts_bytes(actual)
     matches = [e for e in entries if is_our_randomizer(e)]
     if len(matches) != 1 or zlib.decompress(matches[0][2]) != source:
         raise RuntimeError("Final verification failed after installation.")
-    for target_name, new_source, optional in overwrites:
+    for target_name, new_source, required in [
+        (t[0], t[1], t[2] if len(t) > 2 else True) for t in overwrites
+    ]:
         idx = next((i for i, e in enumerate(entries) if script_name(e) == target_name), None)
         if idx is None:
-            if optional:
-                continue  # expected: this overwrite was skipped during patching since the target script didn't exist in this game version
-            raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
+            if required:
+                raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
+            continue  # legitimately absent and optional -- nothing to verify
         if zlib.decompress(entries[idx][2]) != new_source:
             raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
 
@@ -615,6 +652,27 @@ def install_randomizer(game_dir, fmt):
 
 
 def copy_archipelago_companion_files(game_dir):
+    """
+    Archipelago_Combined.rb needs a few loose files next to Game.exe that
+    this patcher CANNOT generate for you (they're specific to your AP world
+    build and your server connection details):
+
+      - archipelago.json         (hostname/port/name/password -- read by
+                                   get_connect_details at runtime; NOT the
+                                   same archipelago.json as the .apworld's
+                                   manifest, despite the identical filename)
+      - Ruby/archipelago_rb/...  (the actual Ruby gem, required by
+                                   `require 'archipelago_rb'`)
+      - ap_location_pool.json    (the item-name -> ordered-location-list
+                                   table Archipelago_Combined.rb reads at
+                                   runtime; ships alongside this installer if
+                                   present)
+
+    If ap_location_pool.json is bundled next to this installer, copy it in
+    automatically. Everything else just gets flagged as still-needed in the
+    status message -- this function returns what it could NOT do so the UI
+    can tell the user.
+    """
     still_needed = []
 
     pool_src = app_resource("ap_location_pool.json")

@@ -212,7 +212,7 @@
   ],
   "Sorcerer's Staff": [
     "MW: Sorcerer's Staff",
-    "RCG: Sorcerer's Staff"
+    "RGC: Sorcerer's Staff"
   ],
   "Sorcery [Ruinous Storm]": [
     "MW: Sorcery [Ruinous Storm]"
@@ -698,7 +698,7 @@
     "Fairy Tale [Pinocchio]"
   ],
   "Poisonbite Ring": [
-    "RCG: Poisonbite Ring",
+    "RGC: Poisonbite Ring",
     "IF: Poisonbite Ring"
   ],
   "Prickett's Ring": [
@@ -834,12 +834,10 @@
     "White Castletown: Ice Stoneplate Ring"
   ],
   "Old King's Ring": [
-    "Winterbell: Old King's Ring",
-    "White Castletown: Old King's Ring"
+    "Winterbell: Old King's Ring"
   ],
   "Polar Bear's Ring": [
-    "Winterbell: Polar Bear's Ring",
-    "White Castletown: Polar Bear's Ring"
+    "Winterbell: Polar Bear's Ring"
   ],
   "Ring of The Indomitable": [
     "White Castletown: Ring of The Indomitable"
@@ -854,12 +852,10 @@
     "White Castletown: Sorcery [Ruinous Arrow Rain]"
   ],
   "Sorcery [Serpent's Embrace]": [
-    "Winterbell: Sorcery [Serpent's Embrace]",
-    "White Castletown: Sorcery [Serpent's Embrace]"
+    "Winterbell: Sorcery [Serpent's Embrace]"
   ],
   "Sorcery [Soul Stream]": [
-    "Winterbell: Sorcery [Soul Stream]",
-    "White Castletown: Sorcery [Soul Stream]"
+    "Winterbell: Sorcery [Soul Stream]"
   ],
   "Black Knight's Ring": [
     "White Castletown: Black Knight's Ring"
@@ -1013,5 +1009,62 @@
   ],
   "Sorcery [Ghostfire]": [
     "LD: Sorcery [Ghostfire] (exchange for Soul of the Bellcaller)"
+  ],
+  "Sorcery [Rampage]": [
+    "LD: Sorcery [Rampage] (exchange for Soul of Conceit)"
+  ],
+  "Blackbeard's Ring": [
+    "Deep Sea: Blackbeard's Ring"
+  ],
+  "Covenant: Node": [
+    "Library Dream: Covenant: Node"
+  ],
+  "Covenant: Bill": [
+    "Ripon Grand Cathedral: Covenant: Bill"
+  ],
+  "Covenant: Dodo": [
+    "Pond of Bloody Tears: Covenant: Dodo"
+  ],
+  "Covenant: Tweedledee & Tweedledum": [
+    "Mental Ward: Covenant: Tweedledee & Tweedledum"
+  ],
+  "Covenant: Capitellar": [
+    "Spore Forest: Covenant: Capitellar"
+  ],
+  "Covenant: Duchess": [
+    "Duchess' Mansion: Covenant: Duchess"
+  ],
+  "Covenant: Mock Turtle": [
+    "Beach of Grief: Covenant: Mock Turtle"
+  ],
+  "Covenant: Walrus": [
+    "Oysters' Rotted Sea: Covenant: Walrus"
+  ],
+  "Covenant: Queen of Hearts": [
+    "Garden of the Heart: Covenant: Queen of Hearts"
+  ],
+  "Covenant: Hatta": [
+    "Endless Tea Party: Covenant: Hatta"
+  ],
+  "Covenant: Maid Victoria": [
+    "Abandoned Station Hanover: Covenant: Maid Victoria"
+  ],
+  "Covenant: Best Girl Prickett": [
+    "Queensland: Covenant: Best Girl Prickett"
+  ],
+  "Covenant: Kuti": [
+    "Deep Sea: Covenant: Kuti"
+  ],
+  "Covenant: Bandersnatch": [
+    "Fuming Forest: Covenant: Bandersnatch"
+  ],
+  "Covenant: Sho": [
+    "Windless Valley: Covenant: Sho"
+  ],
+  "Covenant: Jubjub": [
+    "Sick Clock Tower: Covenant: Jubjub"
+  ],
+  "Covenant: Jabberwock": [
+    "Carroll River: Covenant: Jabberwock"
   ]
 }

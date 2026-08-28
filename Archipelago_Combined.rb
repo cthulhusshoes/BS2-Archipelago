@@ -86,6 +86,23 @@
         'Mist Black Knight Arena' => '$game_switches[1125] = true',
         'Mist White Castletown' => '$game_switches[1126] = true',
         "Mist Jabberwock's Lair" => '$game_switches[1127] = true',
+        'Covenant: Node' => '$game_switches[1150] = true',
+        'Covenant: Bill' => '$game_switches[1151] = true',
+        'Covenant: Dodo' => '$game_switches[1152] = true',
+        'Covenant: Tweedledee & Tweedledum' => '$game_switches[1153] = true; $game_switches[1154] = true',
+        'Covenant: Capitellar' => '$game_switches[1155] = true',
+        'Covenant: Duchess' => '$game_switches[1156] = true',
+        'Covenant: Mock Turtle' => '$game_switches[1157] = true',
+        'Covenant: Walrus' => '$game_switches[1158] = true',
+        'Covenant: Queen of Hearts' => '$game_switches[1159] = true',
+        'Covenant: Hatta' => '$game_switches[1160] = true',
+        'Covenant: Maid Victoria' => '$game_switches[1161] = true',
+        'Covenant: Best Girl Prickett' => '$game_switches[1162] = true',
+        'Covenant: Kuti' => '$game_switches[1163] = true',
+        'Covenant: Bandersnatch' => '$game_switches[1164] = true',
+        'Covenant: Sho' => '$game_switches[1165] = true',
+        'Covenant: Jubjub' => '$game_switches[1170] = true',
+        'Covenant: Jabberwock' => '$game_switches[1171] = true',
     }
 
     $ap_excluded_item_names = [
@@ -352,6 +369,8 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
+    # AP-facing location naming. MUST match generate_manual_apworld.py's
+    # location_name()/KIND_LABELS exactly.
     #--------------------------------------------------------------------
     KIND_LABELS = { "item" => "Item", "weapon" => "Weapon", "armor" => "Armor" }
 
@@ -438,6 +457,17 @@ module BS2Randomizer
         @ap_location_pool
     end
 
+    #--------------------------------------------------------------------
+    # ** Multi-location item disambiguation
+    #--------------------------------------------------------------------
+    MULTI_LOCATION_ITEM_DISAMBIGUATION = {
+        "Flame Stoneplate Ring" => {96 => "SH: Flame Stoneplate Ring", 126 => "FF: Flame Stoneplate Ring"},
+        "Poisonbite Ring" => {42 => "IF: Poisonbite Ring", 62 => "RGC: Poisonbite Ring"},
+        "Ring of White Crow" => {93 => "BFM: Ring of White Crow", 26 => "BoG: Ring of White Crow"},
+        "Sorcerer's Staff" => {70 => "MW: Sorcerer's Staff", 34 => "RGC: Sorcerer's Staff"},
+        "Thunder Stoneplate Ring" => {71 => "SF: Thunder Stoneplate Ring", 118 => "ORS: Thunder Stoneplate Ring"},
+    }
+
     $ap_item_occurrence_counters = Hash.new(0)
 
     def self.ap_location_name(kind, map_id, original_id)
@@ -447,6 +477,13 @@ module BS2Randomizer
                         when "armor"  then $data_armors[original_id] && $data_armors[original_id].name
                         end
         return nil unless display_name
+
+        disambiguation = MULTI_LOCATION_ITEM_DISAMBIGUATION[display_name]
+        if disambiguation
+            matched = disambiguation[map_id.to_i]
+            return matched if matched
+            puts "[Archipelago_Combined] WARNING: '#{display_name}' granted from map #{map_id}, which isn't in its disambiguation table -- falling back to occurrence-count guessing, this pickup's check may be wrong."
+        end
 
         candidates = ap_location_pool[display_name]
         return nil if candidates.nil? || candidates.empty?
@@ -629,6 +666,22 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
+    # ** Covenant unlock pickup triggers
+    #--------------------------------------------------------------------
+    COVENANT_MAP_EVENT_TRIGGERS = {
+        [79, 13] => ["Covenant: Duchess", "Duchess' Mansion: Covenant: Duchess"],
+        [24, 20] => ['Covenant: Jubjub', 'Sick Clock Tower: Covenant: Jubjub'],
+        [31, 95] => ['Covenant: Jabberwock', 'Carroll River: Covenant: Jabberwock'],
+    }
+
+    def self.check_covenant_trigger(interpreter)
+        key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
+        return unless COVENANT_MAP_EVENT_TRIGGERS.key?(key)
+        item_name, location_name = COVENANT_MAP_EVENT_TRIGGERS[key]
+        ArchipelagoLocations.send_check(location_name)
+    end
+
+    #--------------------------------------------------------------------
     # ** AP-interception exclusion by event
     #--------------------------------------------------------------------
     AP_INTERCEPTION_EXCLUDED_EVENTS = {
@@ -643,7 +696,7 @@ module BS2Randomizer
 
     #--------------------------------------------------------------------
     # ** NG+ item preservation
-    #--------------------------------------------------------------------
+    #----------------------------------------------------------------------
     AP_PROTECTED_FROM_REMOVAL = {
         [101, 11] => ["Train Ticket", "Gate Pass", "Edith's Ring",
                        "Silver Ring of Avarice", "Golden Ring of Avarice"],
@@ -663,6 +716,7 @@ module BS2Randomizer
         [52, 22] => 1101,
         [181, 6] => 1109,
         [58, 8] => 1104, [58, 9] => 1104, [58, 10] => 1104,
+        [58, 11] => 1104, [58, 12] => 1104, [58, 13] => 1104,
         [33, 72] => 1105,
         [65, 60] => 1106,
         [85, 2] => 1107,
@@ -680,7 +734,7 @@ module BS2Randomizer
         [40, 11] => 1108,
         [83, 30] => 1119,
         [141, 8] => 1121,
-        [127, 28] => 1102,
+        [127, 28] => 1102, [127, 29] => 1102,
         [328, 23] => 1122,
         [329, 110] => 1123,
         [344, 8] => 1124,
@@ -694,8 +748,115 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
-    # ** Boss soul grants via battle victory
+    # ** Mist unlock triggers -- checked on interaction
     #--------------------------------------------------------------------
+    MIST_FOG_WALL_INTERACT_TRIGGERS = {
+        [52, 22] => ['Mist Crash Chamber', 'Crash Chamber: Mist Crash Chamber'],
+        [181, 6] => ['Mist Library Dream', 'Library Dream: Mist Library Dream'],
+        [58, 8] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 9] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 10] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 11] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 12] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 13] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [33, 72] => ['Mist Liddell Cemetary', 'Liddell Cemetary: Mist Liddell Cemetary'],
+        [65, 60] => ['Mist Pond of Bloody Tears', 'Pond of Bloody Tears: Mist Pond of Bloody Tears'],
+        [85, 2] => ['Mist Mental Ward', 'Mental Ward: Mist Mental Ward'],
+        [73, 14] => ['Mist Spore Forest', 'Spore Forest: Mist Spore Forest'],
+        [79, 14] => ["Mist Duchess' Mansion", "Duchess' Mansion: Mist Duchess' Mansion"],
+        [79, 15] => ["Mist Duchess' Mansion", "Duchess' Mansion: Mist Duchess' Mansion"],
+        [79, 16] => ["Mist Duchess' Mansion", "Duchess' Mansion: Mist Duchess' Mansion"],
+        [93, 13] => ['Mist Billingsgate Fish Market', 'Billingsgate Fish Market: Mist Billingsgate Fish Market'],
+        [105, 16] => ['Mist Slaughterhouse', 'Slaughterhouse: Mist Slaughterhouse'],
+        [108, 9] => ['Mist Riverside', 'Riverside: Mist Riverside'],
+        [108, 10] => ['Mist Riverside', 'Riverside: Mist Riverside'],
+        [108, 11] => ['Mist Riverside', 'Riverside: Mist Riverside'],
+        [143, 43] => ['Mist Red Castle Frissel', 'Red Castle Frissel: Mist Red Castle Frissel'],
+        [143, 44] => ['Mist Red Castle Frissel', 'Red Castle Frissel: Mist Red Castle Frissel'],
+        [143, 42] => ['Mist Red Castle Frissel', 'Red Castle Frissel: Mist Red Castle Frissel'],
+        [153, 18] => ['Mist Upper Lutwidge Town', 'Upper Lutwidge Town: Mist Upper Lutwidge Town'],
+        [149, 6] => ['Mist Ox Ward University', 'Ox Ward University: Mist Ox Ward University'],
+        [158, 9] => ['Mist Sick Clock Tower', 'Sick Clock Tower: Mist Sick Clock Tower'],
+        [43, 9] => ["Mist Jubjub's Nest", "Jubjub's Nest: Mist Jubjub's Nest"],
+        [170, 16] => ['Mist Queensland', 'Queensland: Mist Queensland'],
+        [40, 11] => ['Mist Mushroom Village', 'Mushroom Village: Mist Mushroom Village'],
+        [83, 30] => ['Mist Infinite Food', 'Infinite Food: Mist Infinite Food'],
+        [141, 8] => ['Mist Deep Sea', 'Deep Sea: Mist Deep Sea'],
+        [127, 28] => ['Mist Fuming Forest', 'Fuming Forest: Mist Fuming Forest'],
+        [127, 29] => ['Mist Fuming Forest', 'Fuming Forest: Mist Fuming Forest'],
+        [328, 23] => ['Mist Crimean Nursing Graveyard', 'Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard'],
+        [329, 110] => ['Mist Florence Arena', 'Florence Arena: Mist Florence Arena'],
+        [344, 8] => ['Mist Windless Valley', 'Windless Valley: Mist Windless Valley'],
+        [350, 4] => ['Mist Black Knight Arena', 'Black Knight Arena: Mist Black Knight Arena'],
+        [351, 13] => ['Mist White Castletown', 'White Castletown: Mist White Castletown'],
+        [109, 8] => ["Mist Jabberwock's Lair", "Jabberwock's Lair: Mist Jabberwock's Lair"],
+    }
+
+    def self.check_mist_fog_wall_interact_trigger(map_id, event_id)
+        key = [map_id, event_id]
+        return unless MIST_FOG_WALL_INTERACT_TRIGGERS.key?(key)
+        item_name, location_name = MIST_FOG_WALL_INTERACT_TRIGGERS[key]
+        ArchipelagoLocations.send_check(location_name)
+    end
+
+    #--------------------------------------------------------------------
+    # ** Covenant NPC access gating
+    #--------------------------------------------------------------------
+    COVENANT_NPC_TRIGGERS = {
+        [101, 9] => 1150,   # Node
+        [62, 84] => 1151,   # Bill
+        [37, 53] => 1152,   # Dodo
+        [22, 3] => 1153,    # Tweedledee
+        [22, 4] => 1154,    # Tweedledum
+        [74, 6] => 1155,    # Capitellar
+        [80, 14] => 1156,   # Duchess
+        [27, 3] => 1157,    # Mock Turtle
+        [125, 10] => 1158,  # Walrus
+        [137, 7] => 1159,   # Queen of Hearts
+        [156, 25] => 1160,  # Hatta
+        [45, 12] => 1161,   # Maid Victoria
+        [169, 8] => 1162,   # Best Girl Pricket
+        [197, 4] => 1163,   # Kuti
+        [133, 5] => 1164,   # Bandersnatch
+        [340, 7] => 1165,   # Sho
+    }
+    COVENANT_BLOCKED_MESSAGE = "She thinks you are too ugly to speak with right now."
+
+    def self.covenant_npc_switch(map_id, event_id)
+        COVENANT_NPC_TRIGGERS[[map_id, event_id]]
+    end
+
+    #--------------------------------------------------------------------
+    # ** Covenant unlock triggers -- checked on interaction
+    #--------------------------------------------------------------------
+    COVENANT_NPC_INTERACT_TRIGGERS = {
+        [101, 9] => ['Covenant: Node', 'Library Dream: Covenant: Node'],
+        [62, 84] => ['Covenant: Bill', 'Ripon Grand Cathedral: Covenant: Bill'],
+        [37, 53] => ['Covenant: Dodo', 'Pond of Bloody Tears: Covenant: Dodo'],
+        [22, 3] => ['Covenant: Tweedledee & Tweedledum', 'Mental Ward: Covenant: Tweedledee & Tweedledum'],
+        [22, 4] => ['Covenant: Tweedledee & Tweedledum', 'Mental Ward: Covenant: Tweedledee & Tweedledum'],
+        [74, 6] => ['Covenant: Capitellar', 'Spore Forest: Covenant: Capitellar'],
+        [27, 3] => ['Covenant: Mock Turtle', 'Beach of Grief: Covenant: Mock Turtle'],
+        [125, 10] => ['Covenant: Walrus', "Oysters' Rotted Sea: Covenant: Walrus"],
+        [137, 7] => ['Covenant: Queen of Hearts', 'Garden of the Heart: Covenant: Queen of Hearts'],
+        [156, 25] => ['Covenant: Hatta', 'Endless Tea Party: Covenant: Hatta'],
+        [45, 12] => ['Covenant: Maid Victoria', 'Abandoned Station Hanover: Covenant: Maid Victoria'],
+        [169, 8] => ['Covenant: Best Girl Prickett', 'Queensland: Covenant: Best Girl Prickett'],
+        [197, 4] => ['Covenant: Kuti', 'Deep Sea: Covenant: Kuti'],
+        [133, 5] => ['Covenant: Bandersnatch', 'Fuming Forest: Covenant: Bandersnatch'],
+        [340, 7] => ['Covenant: Sho', 'Windless Valley: Covenant: Sho'],
+    }
+
+    def self.check_covenant_npc_interact_trigger(map_id, event_id)
+        key = [map_id, event_id]
+        return unless COVENANT_NPC_INTERACT_TRIGGERS.key?(key)
+        item_name, location_name = COVENANT_NPC_INTERACT_TRIGGERS[key]
+        ArchipelagoLocations.send_check(location_name)
+    end
+
+    #--------------------------------------------------------------------
+    # ** Boss soul grants via battle victory
+    #----------------------------------------------------------------------
     BOSS_SOUL_TROOP_TRIGGERS = {
         291 => [["Arbiter's Scythe", "ASH: Arbiter's Scythe"]],
         30 => [['Fairy Tale Scrap Two', 'LT: Fairy Tale Scrap Two']],
@@ -731,6 +892,46 @@ module BS2Randomizer
         569 => [['Soul of Florence', 'Crimean Nursing Graveyard: Soul of Florence']],
         614 => [['Soul of the White Unicorn', 'Winterbell: Soul of the White Unicorn']],
         616 => [['Soul of the White Lion', 'Winterbell: Soul of the White Lion']],
+
+        # NPCs and invaders (hostile NPCs that chase and initiate a fight)
+        # -- same mechanism, same table, since it's the identical shape of
+        # problem: these grant loot as a native drop_item on their own
+        # database entry, and this table is a guaranteed, direct backup
+        # that fires on defeat regardless of any relocation from
+        # enemy_randomization or which of a troop's own forms was
+        # actually fought.
+        71 => [['Bloodbite Ring', 'PoBT: Bloodbite Ring']],  # Sadistic Mistress Brownrigg
+        60 => [["Sorcerer's Staff", "RGC: Sorcerer's Staff"]],  # Cotton the Witch
+        91 => [['Ring of Rebellion', "DM: Ring of Rebellion"]],  # Monster Butler Archibald
+        115 => [['Empty Ring', 'BFM: Empty Ring']],  # Hollow Soldier Christie
+        126 => [["Resurrectionist's Ring", "SH: Resurrectionist's Ring"]],  # Corpse Thief Hare
+        127 => [["Knight's Ring", "SH: Knight's Ring"]],  # Fleeing Knight Jim
+        139 => [['Ring of Goddess', 'CR: Ring of Goddess']],  # Wainwright the Sinful
+        152 => [['Dusk Crown Ring', 'MW: Dusk Crown Ring']],  # Dark Doctor Harold
+        171 => [["Barber's Ring", "ULT: Barber's Ring"]],  # Barber Todd
+        225 => [['Fairy Tale [Bluebeard]', 'PoBT: Fairy Tale [Bluebeard]']],  # Bluebeard
+        226 => [['Fairy Tale [Rascal]', 'LD: Fairy Tale [Rascal]']],  # Farthest Beast Rascal
+        228 => [['Fairy Tale [The Crab and The Monkey]', 'BFM: Fairy Tale [The Crab and The Monkey]']],  # The Great Monkey-Killing Crab
+        229 => [['Fairy Tale [Boy Who Cried Wolf]', 'ULT: Fairy Tale [Boy Who Cried Wolf]']],  # Boy Who Cried Wolf
+        230 => [['Fairy Tale [The Dog and The Shadow]', 'CR: Fairy Tale [The Dog and The Shadow]']],  # Greedy Dog
+        231 => [['Fairy Tale [The Gigantic Turnip]', 'NF: Fairy Tale [The Gigantic Turnip]']],  # The Gigantic Turnip
+        232 => [['Fairy Tale [Mt. Kachi Kachi]', 'FF: Fairy Tale [Mt. Kachi Kachi]']],  # Tanuki of the Crackling Mountain
+        233 => [['Fairy Tale [Pooh Bear]', 'QL: Fairy Tale [Pooh Bear]']],  # Winnie the Pooh
+        268 => [['Red Shield', 'RCF: Red Shield']],  # Franklin Bollvolt I
+        269 => [["Champion's Ring", "RCF: Champion's Ring"]],  # Fist Duelist Byron
+        271 => [['Sloppy', 'SH: Sloppy'], ['Squishy', 'SH: Squishy']],  # Acid Practitioner Haigh -- grants both
+        272 => [['Poisonbite Ring', 'IF: Poisonbite Ring']],  # Teacup Poisoner Graham
+        295 => [['Ring of the Clown Murderer', 'QL: Ring of the Clown Murderer']],  # Killer Clown Gacy
+        342 => [["Blackbeard's Ring", "Deep Sea: Blackbeard's Ring"]],  # Blackbeard Edward
+        343 => [['Pirate Handgun', 'ORS: Pirate Handgun']],  # Captain Kid
+        370 => [['Ring of My Struggle', 'SH: Ring of My Struggle']],  # Repulsive Hindley
+        567 => [['Two-Faced Buckler', 'Crimean Nursing Graveyard: Two-Faced Buckler']],  # Mad Devil Hyde
+        35 => [["Angel's Ring", "LT: Angel's Ring"]],  # Angel Manufacturer Amelia
+        29 => [['Ring of Fear', 'LT: Ring of Fear']],  # Frederick of Fear
+        116 => [["Cannibal's Shield", "BoG: Cannibal's Shield"]],  # Cannibal Sawney Bean
+        210 => [['Fairy Tale [The Fox and The Grapes]', 'GotH: Fairy Tale [The Fox and The Grapes]']],  # Grape Guardbeast
+        5 => [['Butcher Greataxe', 'RH: Butcher Greataxe']],  # Ketch the Executioner
+        270 => [['Fairy Tale [Wolf and ××× Young Goats]', 'LC: Fairy Tale [Wolf and ××× Young Goats]']],  # The Seven Little Goats
     }
 
     def self.grant_boss_souls_for_troop(troop_id)
@@ -742,6 +943,14 @@ module BS2Randomizer
     #--------------------------------------------------------------------
     # ** Shop item randomization
     #--------------------------------------------------------------------
+    EXCLUDED_SHOP_TRIGGERS = {
+        [152, 35] => true,
+    }
+
+    def self.shop_excluded?(map_id, event_id)
+        EXCLUDED_SHOP_TRIGGERS[[map_id, event_id]] == true
+    end
+
     def self.shop_replacement_pool
         return @shop_replacement_pool if @shop_replacement_pool
         @shop_replacement_pool = []
@@ -795,9 +1004,19 @@ end
 class Game_Event < Game_Character
     alias bs2ap_event_start start
     def start
+        BS2Randomizer.check_mist_fog_wall_interact_trigger($game_map.map_id, @id)
         switch_id = BS2Randomizer.mist_fog_wall_switch($game_map.map_id, @id)
         if switch_id && !$game_switches[switch_id]
             $game_message.add("The fog is too dense to push through here.")
+            return
+        end
+        #------------------------------------------------------------------
+        # Covenant unlock
+        #------------------------------------------------------------------
+        BS2Randomizer.check_covenant_npc_interact_trigger($game_map.map_id, @id)
+        covenant_switch_id = BS2Randomizer.covenant_npc_switch($game_map.map_id, @id)
+        if covenant_switch_id && !$game_switches[covenant_switch_id]
+            $game_message.add(BS2Randomizer::COVENANT_BLOCKED_MESSAGE)
             return
         end
         bs2ap_event_start
@@ -911,6 +1130,37 @@ class Game_Interpreter
     alias bs2r4_command_128 command_128
     alias bs2r4_command_121 command_121
     alias bs2r6_command_117 command_117
+    alias bs2r9_command_302 command_302
+    alias bs2r12_command_125 command_125
+
+    #--------------------------------------------------------------------
+    # ** Shop item randomization -- excluded shops
+    #--------------------------------------------------------------------
+    def command_302
+        map_id = $game_map ? $game_map.map_id : nil
+        $ap_shop_randomization_excluded = BS2Randomizer.shop_excluded?(map_id, @event_id)
+        bs2r9_command_302
+    end
+
+    #--------------------------------------------------------------------
+    # ** Boss-covenant NPCs (Jubjub, Jabberwock) -- gate the level-up,
+    #    never the welcome dialogue
+    #--------------------------------------------------------------------
+    COVENANT_BOSS_TRIGGERS = {
+        [43, 11] => 1170,   # Jubjub
+        [180, 10] => 1171,  # Jabberwock
+    }
+
+    def command_125
+        map_id = $game_map ? $game_map.map_id : nil
+        switch_id = COVENANT_BOSS_TRIGGERS[[map_id, @event_id]]
+        if switch_id && !$game_switches[switch_id]
+            $game_message.add(BS2Randomizer::COVENANT_BLOCKED_MESSAGE)
+            @index = @list.size - 1
+            return true
+        end
+        bs2r12_command_125
+    end
 
     #--------------------------------------------------------------------
     # ** DeathLink -- broadcast on local death
@@ -933,6 +1183,28 @@ class Game_Interpreter
         end
         bs2r6_command_117
     end
+
+end
+
+
+#------------------------------------------------------------------------
+# ** DeathLink -- safe remote-death injection
+#--------------------------------------------------------------------------
+class Scene_Map < Scene_Base
+    alias bs2r11_update update
+    def update
+        bs2r11_update
+        if defined?($ap_pending_deathlinks) && $ap_pending_deathlinks && !$ap_pending_deathlinks.empty? &&
+           $game_map && $game_map.interpreter && !$game_map.interpreter.running?
+            $ap_pending_deathlinks.pop(true) rescue nil
+            $game_map.interpreter.setup($data_common_events[Game_Interpreter::DEATH_LINK_COMMON_EVENT_ID].list)
+        end
+    end
+end
+
+
+class Game_Interpreter
+
 
     #--------------------------------------------------------------------
     # ** Endings / goal
@@ -1006,6 +1278,7 @@ class Game_Interpreter
 
     def command_126
         BS2Randomizer.check_mist_trigger(self)
+        BS2Randomizer.check_covenant_trigger(self)
         if BS2Randomizer.protected_from_removal?(self, "item", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
             return true if value < 0
@@ -1048,6 +1321,7 @@ class Game_Interpreter
 
     def command_127
         BS2Randomizer.check_mist_trigger(self)
+        BS2Randomizer.check_covenant_trigger(self)
         if BS2Randomizer.protected_from_removal?(self, "weapon", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
             return true if value < 0
@@ -1085,6 +1359,7 @@ class Game_Interpreter
 
     def command_128
         BS2Randomizer.check_mist_trigger(self)
+        BS2Randomizer.check_covenant_trigger(self)
         if BS2Randomizer.protected_from_removal?(self, "armor", @params[0])
             value = operate_value(@params[1], @params[2], @params[3])
             return true if value < 0
@@ -1126,7 +1401,7 @@ end
 class Scene_Shop < Scene_MenuBase
     alias bs2r5_prepare prepare
     def prepare(goods, purchase_only)
-        if BS2Randomizer.enabled?("shop_item_randomization")
+        if BS2Randomizer.enabled?("shop_item_randomization") && !$ap_shop_randomization_excluded
             goods = goods.map { |entry| BS2Randomizer.shuffled_shop_entry(entry) }
         end
         bs2r5_prepare(goods, purchase_only)
@@ -1159,7 +1434,8 @@ class Game_Party < Game_Unit
                    when RPG::Armor  then "armor"
                    end
             if kind && !BS2Randomizer.excluded_by_name?(kind, item.id) && BS2Randomizer.has_ap_location?(kind, item.id)
-                name = BS2Randomizer.ap_location_name(kind, 0, item.id)
+                current_map_id = $game_map ? $game_map.map_id : 0
+                name = BS2Randomizer.ap_location_name(kind, current_map_id, item.id)
                 if name
                     ArchipelagoLocations.send_check(name)
                     return # don't grant locally -- AP will send the real item back
@@ -1185,7 +1461,7 @@ end
         $archipelago.connect_info["tags"] = $ap_tags
 
         unhandled_items = Queue.new
-        pending_deathlinks = Queue.new
+        $ap_pending_deathlinks = Queue.new
         $archipelago.add_listener("DataPackage") { |msg| ArchipelagoLocations.ingest_datapackage(msg) }
 
         $archipelago.add_listener("Connected") do |msg|
@@ -1205,11 +1481,6 @@ end
                 loop do
                     ready = $receive_items_outside_map || SceneManager.scene_is?(Scene_Map)
                     if ready
-                        if !pending_deathlinks.empty? && defined?($game_map) && $game_map &&
-                           $game_map.interpreter && !$game_map.interpreter.running?
-                            pending_deathlinks.pop(true) rescue nil
-                            $game_map.interpreter.setup($data_common_events[Game_Interpreter::DEATH_LINK_COMMON_EVENT_ID].list)
-                        end
                         item = unhandled_items.pop(true) rescue nil
                         if item
                             unless $ap_datapackage_ready
@@ -1255,13 +1526,10 @@ end
             end
         end
 
-        #--------------------------------------------------------------------
-        # DeathLink
-        #--------------------------------------------------------------------
         $archipelago.add_listener("Bounced") do |msg|
             if $ap_death_link_enabled && msg["tags"] && msg["tags"].include?("DeathLink") &&
                msg["data"] && msg["data"]["source"] != $archipelago.connect_info["name"]
-                pending_deathlinks.push(true)
+                $ap_pending_deathlinks.push(true)
             end
         end
 
