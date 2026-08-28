@@ -1138,7 +1138,7 @@ class Game_Interpreter
     #--------------------------------------------------------------------
     def command_302
         map_id = $game_map ? $game_map.map_id : nil
-        $ap_shop_randomization_excluded = BS2Randomizer.shop_excluded?(152, 35)
+        $ap_shop_randomization_excluded = BS2Randomizer.shop_excluded?(map_id, @event_id)
         bs2r9_command_302
     end
 
