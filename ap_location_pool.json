@@ -1,334 +1,30 @@
 {
-  "Broken Sword": [
-    "CC: Broken Sword"
+  "Adultery Ring": [
+    "ASH: Adultery Ring"
   ],
-  "Golden Ring of Avarice": [
-    "LD: Golden Ring of Avarice"
+  "Arbiter's Scythe": [
+    "ASH: Arbiter's Scythe"
   ],
-  "Silver Ring of Avarice": [
-    "LD: Silver Ring of Avarice"
+  "Mosquito Ring": [
+    "ASH: Mosquito Ring"
   ],
-  "Herb Flask": [
-    "LD: Herb Flask on ground",
-    "SF: Herb Flask near boat",
-    "LC: Herb Flask from Pumpkin-O",
-    "LC: Herb Flask in Cemetary",
-    "MW: Herb Flask on Beds",
-    "PoBT: Herb Flask top left bonfire room",
-    "LT: Herb Flask near bonfire",
-    "LT: Herb Flask near Frederick",
-    "CR: Herb Flask in Shop",
-    "CR: Herb Flask Red Hood Basement",
-    "BFM: Herb Flask before Mist",
-    "NF: Herb Flask under bonfire",
-    "GotH: Herb Flask lower right",
-    "RCF: Herb Flask next to croquet",
-    "DM: Herb Flask near Mimic",
-    "QL: Herb Flask near Pooh Bear"
+  "Covenant: Maid Victoria": [
+    "ASH: Covenant: Maid Victoria"
   ],
-  "Herb Flask (M)": [
-    "LD: Herb Flask (M) on ground",
-    "MV: Herb Flask (M) near shortcut",
-    "RGC: Herb Flask (M) right side drop",
-    "MW: Herb Flask (M) Dorothy",
-    "OWU: Herb Flask (M)",
-    "NF: Herb Flask (M) on well",
-    "DM: Herb Flask (M) near bonfire",
-    "BoG: Herb Flask (M) near restaurant"
+  "Cannon": [
+    "BFM: Cannon"
   ],
-  "Buckler": [
-    "RH: Buckler"
+  "Empty Ring": [
+    "BFM: Empty Ring"
   ],
-  "Flame Stoneplate Ring": [
-    "FF: Flame Stoneplate Ring",
-    "SH: Flame Stoneplate Ring"
+  "Fairy Tale [Adventures of Sinbad]": [
+    "BFM: Fairy Tale [Adventures of Sinbad]"
   ],
-  "Armor of the Sun": [
-    "FF: Armor of the Sun"
+  "Fairy Tale [The Crab and The Monkey]": [
+    "BFM: Fairy Tale [The Crab and The Monkey]"
   ],
-  "Blade Shield": [
-    "PoBT: Blade Shield"
-  ],
-  "Miracle [Providence]": [
-    "SF: Miracle [Providence]"
-  ],
-  "Mushroom Shield": [
-    "SF: Mushroom Shield"
-  ],
-  "Sorcery [Mana Drain]": [
-    "SF: Sorcery [Mana Drain]"
-  ],
-  "Wind God's Ring": [
-    "SF: Wind God's Ring"
-  ],
-  "Thunder Stoneplate Ring": [
-    "SF: Thunder Stoneplate Ring",
-    "ORS: Thunder Stoneplate Ring"
-  ],
-  "Hunter's Bow": [
-    "MV: Hunter's Bow"
-  ],
-  "Halberd": [
-    "MV: Halberd"
-  ],
-  "Sorcery [Green Power]": [
-    "MV: Sorcery [Green Power]"
-  ],
-  "Ring of Iron Maiden": [
-    "PoBT: Ring of Iron Maiden"
-  ],
-  "Ring of the Edge": [
-    "PoBT: Ring of the Edge"
-  ],
-  "Magician's Coat": [
-    "PoBT: Magician's Coat"
-  ],
-  "Magician Hat": [
-    "PoBT: Magician Hat"
-  ],
-  "Club": [
-    "PoBT: Club"
-  ],
-  "Viking Helm": [
-    "PoBT: Viking Helm"
-  ],
-  "Thief's Dagger": [
-    "LC: Thief's Dagger"
-  ],
-  "Thief's Mask": [
-    "LC: Thief's Mask"
-  ],
-  "Cloak of Shadows": [
-    "LC: Cloak of Shadows"
-  ],
-  "Iron Round Shield": [
-    "LC: Iron Round Shield"
-  ],
-  "Viper's Clothing": [
-    "LC: Viper's Clothing"
-  ],
-  "Ring of Life": [
-    "LC: Ring of Life"
-  ],
-  "Holy Knight's Shield": [
-    "FF: Holy Knight's Shield"
-  ],
-  "Folk Tale [Jeanne d'Arc]": [
-    "FF: Folk Tale [Jeanne d'Arc]"
-  ],
-  "Clergy Clothes": [
-    "RGC: Clergy Clothes"
-  ],
-  "Clergy Circlet": [
-    "RGC: Clergy Circlet"
-  ],
-  "Mace": [
-    "RGC: Mace"
-  ],
-  "Sorcery [Bloody Carthus]": [
-    "RGC: Sorcery [Bloody Carthus]"
-  ],
-  "Sorcery Ring": [
-    "RGC: Sorcery Ring"
-  ],
-  "Red Tearstone Ring": [
-    "PoBT: Red Tearstone Ring"
-  ],
-  "Soul of the Head-Hunting Beast": [
-    "CC: Soul of the Head-Hunting Beast"
-  ],
-  "Ring of Fragile Life": [
-    "CC: Ring of Fragile Life"
-  ],
-  "Hachigane": [
-    "LT: Hachigane"
-  ],
-  "Sorcery [Tearing Grudge]": [
-    "LT: Sorcery [Tearing Grudge]"
-  ],
-  "Fairy Tale [The Little Match Girl]": [
-    "LT: Fairy Tale [The Little Match Girl]"
-  ],
-  "Match-Seller's Clothes": [
-    "LT: Match-Seller's Clothes"
-  ],
-  "Spell Stoneplate Ring": [
-    "MW: Spell Stoneplate Ring",
-    "LD: Spell Stoneplate Ring (exchange for Soul of the Pregnant Cake)",
-    "LD: Spell Stoneplate Ring (second exchange for Soul of the Pregnant Cake)"
-  ],
-  "Plate Mail": [
-    "MW: Plate Mail"
-  ],
-  "Leather Armor": [
-    "LT: Leather Armor"
-  ],
-  "Ring of the Enduring": [
-    "LT: Ring of the Enduring"
-  ],
-  "Evil Eye Ring": [
-    "LT: Evil Eye Ring"
-  ],
-  "Silver Pistol": [
-    "LT: Silver Pistol"
-  ],
-  "Hunter's Attire": [
-    "LT: Hunter's Attire"
-  ],
-  "Beasthunter Saw": [
-    "LT: Beasthunter Saw"
-  ],
-  "Fairy Tale Scrap Two": [
-    "LT: Fairy Tale Scrap Two"
-  ],
-  "Fairy Tale Scrap Three": [
-    "LT: Fairy Tale Scrap Three"
-  ],
-  "Round Shield": [
-    "LT: Round Shield"
-  ],
-  "Ring of Steel Protection": [
-    "LT: Ring of Steel Protection",
-    "LD: Ring of Steel Protection (exchange for Soul of the Gray Eagle)",
-    "LD: Ring of Steel Protection (second exchange for Soul of the Gray Eagle)"
-  ],
-  "Sorcery [Flame]": [
-    "LT: Sorcery [Flame]"
-  ],
-  "Hans' Machine Gun": [
-    "MW: Hans' Machine Gun"
-  ],
-  "Sniper's Ring": [
-    "MW: Sniper's Ring"
-  ],
-  "Storm Ruler": [
-    "MW: Storm Ruler"
-  ],
-  "Fairy Tale [Wizard of Oz]": [
-    "MW: Fairy Tale [Wizard of Oz]"
-  ],
-  "Toto's Ring": [
-    "MW: Toto's Ring"
-  ],
-  "Sorcerer's Staff": [
-    "MW: Sorcerer's Staff",
-    "RGC: Sorcerer's Staff"
-  ],
-  "Sorcery [Ruinous Storm]": [
-    "MW: Sorcery [Ruinous Storm]"
-  ],
-  "Sorcery [Divine Lightning]": [
-    "PoBT: Sorcery [Divine Lightning]"
-  ],
-  "Sorcery [Phalanx]": [
-    "RH: Sorcery [Phalanx]"
-  ],
-  "Bunker Shield": [
-    "PoF: Bunker Shield"
-  ],
-  "Cheshire Cat's Ring": [
-    "PoF: Cheshire Cat's Ring"
-  ],
-  "Hornet Ring": [
-    "PoF: Hornet Ring"
-  ],
-  "Church Rifle": [
-    "RGC: Church Rifle"
-  ],
-  "Butcher Greataxe": [
-    "RH: Butcher Greataxe"
-  ],
-  "Ring of Fear": [
-    "LT: Ring of Fear"
-  ],
-  "Fairy Tale [Wolf and ××× Young Goats]": [
-    "LC: Fairy Tale [Wolf and ××× Young Goats]"
-  ],
-  "Fairy Tale [Rascal]": [
-    "LD: Fairy Tale [Rascal]"
-  ],
-  "Bloodbite Ring": [
-    "PoBT: Bloodbite Ring"
-  ],
-  "Soul of the Gray Eagle": [
-    "MW: Soul of the Gray Eagle"
-  ],
-  "Edith's Ring": [
-    "MW: Edith's Ring"
-  ],
-  "Fairy Tale [Iron Hans]": [
-    "MW: Fairy Tale [Iron Hans]"
-  ],
-  "Fairy Tale [Mt. Kachi Kachi]": [
-    "FF: Fairy Tale [Mt. Kachi Kachi]"
-  ],
-  "Tyrant Ring": [
-    "LD: Tyrant Ring"
-  ],
-  "Fairy Tale Scrap One": [
-    "ULT: Fairy Tale Scrap One"
-  ],
-  "Sky Knight's Cap": [
-    "ULT: Sky Knight's Cap"
-  ],
-  "Exorcist's Ring": [
-    "ULT: Exorcist's Ring"
-  ],
-  "Sorcery [Treponema]": [
-    "ULT: Sorcery [Treponema]"
-  ],
-  "Fairy Tale [Boy Who Cried Wolf]": [
-    "ULT: Fairy Tale [Boy Who Cried Wolf]"
-  ],
-  "Knight's Sword+3": [
-    "ULT: Knight's Sword+3"
-  ],
-  "Harlot's Ring": [
-    "ULT: Harlot's Ring"
-  ],
-  "Soul of Jack": [
-    "ULT: Soul of Jack"
-  ],
-  "Ring of Heaven": [
-    "OWU: Ring of Heaven",
-    "LD: Ring of Heaven (exchange for Soul of the Bright Star)",
-    "LD: Ring of Heaven (second exchange for Soul of the Bright Star)"
-  ],
-  "Sorcery [Heavy Soul Arrow]": [
-    "CR: Sorcery [Heavy Soul Arrow]"
-  ],
-  "Londinium Ring": [
-    "CR: Londinium Ring"
-  ],
-  "Fairy Tale [The Dog and The Shadow]": [
-    "CR: Fairy Tale [The Dog and The Shadow]"
-  ],
-  "Abhorrent Coat": [
-    "CR: Abhorrent Coat"
-  ],
-  "Black Vanguard's Shield": [
-    "OWU: Black Vanguard's Shield"
-  ],
-  "Sorcery [Divine Beast's Thunder]": [
-    "OWU: Sorcery [Divine Beast's Thunder]"
-  ],
-  "Miracle [Erase]": [
-    "OWU: Miracle [Erase]"
-  ],
-  "Miracle [Cure]": [
-    "OWU: Miracle [Cure]"
-  ],
-  "Ring of Vanity": [
-    "OWU: Ring of Vanity"
-  ],
-  "Demon's Catalyst": [
-    "OWU: Demon's Catalyst"
-  ],
-  "Claymore": [
-    "FF: Claymore"
-  ],
-  "Sorcery [Dispel]": [
-    "BFM: Sorcery [Dispel]"
+  "Knuckles": [
+    "BFM: Knuckles"
   ],
   "Ring of White Crow": [
     "BFM: Ring of White Crow",
@@ -337,209 +33,131 @@
   "Ring of the Deep": [
     "BFM: Ring of the Deep"
   ],
+  "Shoeshiner's Ring": [
+    "BFM: Shoeshiner's Ring"
+  ],
+  "Sorcery [Dispel]": [
+    "BFM: Sorcery [Dispel]"
+  ],
+  "Sorcery [Hidden Body]": [
+    "BFM: Sorcery [Hidden Body]"
+  ],
+  "Soul of the Bellcaller": [
+    "BFM: Soul of the Bellcaller"
+  ],
   "Warrior's Armor": [
     "BFM: Warrior's Armor"
   ],
-  "Fairy Tale [The Crab and The Monkey]": [
-    "BFM: Fairy Tale [The Crab and The Monkey]"
+  "Covenant: Mock Turtle": [
+    "BoG: Covenant: Mock Turtle"
   ],
-  "Empty Ring": [
-    "BFM: Empty Ring"
+  "Mist Billingsgate Fish Market": [
+    "Billingsgate Fish Market: Mist Billingsgate Fish Market"
   ],
-  "Partisan": [
-    "SH: Partisan"
+  "Mist Black Knight Arena": [
+    "Black Knight Arena: Mist Black Knight Arena"
   ],
-  "Apple Ring": [
-    "SH: Apple Ring"
+  "Cannibal's Shield": [
+    "BoG: Cannibal's Shield"
   ],
-  "Ring of My Struggle": [
-    "SH: Ring of My Struggle"
+  "Griffin Shield": [
+    "BoG: Griffin Shield"
   ],
-  "Sloppy": [
-    "SH: Sloppy"
+  "Mock Turtle's Ladle": [
+    "BoG: Mock Turtle's Ladle"
   ],
-  "Squishy": [
-    "SH: Squishy"
+  "Mock Turtle's Shell": [
+    "BoG: Mock Turtle's Shell"
   ],
-  "Resurrectionist's Ring": [
-    "SH: Resurrectionist's Ring"
+  "Broken Sword": [
+    "CC: Broken Sword"
   ],
-  "Knight's Ring": [
-    "SH: Knight's Ring"
+  "Ring of Fragile Life": [
+    "CC: Ring of Fragile Life"
   ],
-  "Armor of Babel": [
-    "SH: Armor of Babel"
+  "Soul of the Head-Hunting Beast": [
+    "CC: Soul of the Head-Hunting Beast"
   ],
-  "Helmet of Babel": [
-    "SH: Helmet of Babel"
+  "Mystery of Night Sky": [
+    "CD: Mystery of Night Sky (Ashes Reignited)"
   ],
-  "Soul of the Dean": [
-    "OWU: Soul of the Dean"
-  ],
-  "Folk Tale [Saint of Alexandria]": [
-    "OWU: Folk Tale [Saint of Alexandria]"
-  ],
-  "Dusk Crown Ring": [
-    "MW: Dusk Crown Ring"
-  ],
-  "Soul of the Bright Star": [
-    "SCT: Soul of the Bright Star"
-  ],
-  "Fairy Tale [The Little Prince]": [
-    "SCT: Fairy Tale [The Little Prince]"
-  ],
-  "Tinkerbell's Ring": [
-    "SCT: Tinkerbell's Ring"
-  ],
-  "Armor of the Abyss": [
-    "SCT: Armor of the Abyss"
-  ],
-  "Troll Ring": [
-    "SCT: Troll Ring"
-  ],
-  "Soul of Conceit": [
-    "CR: Soul of Conceit"
+  "Abhorrent Coat": [
+    "CR: Abhorrent Coat"
   ],
   "Fairy Tale [Dog of Flanders]": [
     "CR: Fairy Tale [Dog of Flanders]"
   ],
-  "Angel's Ring": [
-    "LT: Angel's Ring"
+  "Fairy Tale [Goose That Laid Golden Eggs]": [
+    "CR: Fairy Tale [Goose That Laid Golden Eggs]"
   ],
-  "Soul of the Jubjub": [
-    "SCT: Soul of the Jubjub"
+  "Fairy Tale [The Dog and The Shadow]": [
+    "CR: Fairy Tale [The Dog and The Shadow]"
   ],
-  "Gear of Madness": [
-    "SCT: Gear of Madness"
+  "Londinium Ring": [
+    "CR: Londinium Ring"
+  ],
+  "Ring of Goddess": [
+    "CR: Ring of Goddess"
+  ],
+  "Sorcery [Heavy Soul Arrow]": [
+    "CR: Sorcery [Heavy Soul Arrow]"
+  ],
+  "Soul of Conceit": [
+    "CR: Soul of Conceit"
   ],
   "Soul of the Jabberwock": [
     "CR: Soul of the Jabberwock"
   ],
-  "Fairy Tale [Robin Hood]": [
-    "FF: Fairy Tale [Robin Hood]"
+  "Mist Crash Chamber": [
+    "Crash Chamber: Mist Crash Chamber"
   ],
-  "Banker's Ring": [
-    "FF: Banker's Ring"
+  "Almighty Ring": [
+    "Crimean Nursing Graveyard: Almighty Ring"
   ],
-  "Soul of the Bandersnatch": [
-    "FF: Soul of the Bandersnatch"
+  "Corpse-Eater's Ring": [
+    "Crimean Nursing Graveyard: Corpse-Eater's Ring"
   ],
-  "Moonlight Greatsword": [
-    "RH: Moonlight Greatsword"
+  "Fake Angel's Wreath": [
+    "Crimean Nursing Graveyard: Fake Angel's Wreath"
   ],
-  "Fairy Tale [Black Rabbit of Inaba]": [
-    "RH: Fairy Tale [Black Rabbit of Inaba]"
+  "God's Angels": [
+    "Crimean Nursing Graveyard: God's Angels"
   ],
-  "Soul of Queen of Torture Tools": [
-    "PoBT: Soul of Queen of Torture Tools"
+  "Miracle [Summon Wall of Flesh]": [
+    "Crimean Nursing Graveyard: Miracle [Summon Wall of Flesh]"
   ],
-  "Sorcery [Meteor Shower]": [
-    "PoBT: Sorcery [Meteor Shower]"
+  "Mist Crimean Nursing Graveyard": [
+    "Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard"
   ],
-  "Folk Tale [Elizabeth Bathory]": [
-    "PoBT: Folk Tale [Elizabeth Bathory]"
+  "Sorcery [Acid Rain]": [
+    "Crimean Nursing Graveyard: Sorcery [Acid Rain]"
   ],
-  "Angel's Raiment": [
-    "NF: Angel's Raiment"
+  "Sorcery [Shadowy Bog]": [
+    "Crimean Nursing Graveyard: Sorcery [Shadowy Bog]"
   ],
-  "Ring of the Abyss": [
-    "NF: Ring of the Abyss"
+  "Soul of Florence": [
+    "Crimean Nursing Graveyard: Soul of Florence"
   ],
-  "Brick Shield": [
-    "NF: Brick Shield"
+  "Soul of the Wet Nurses": [
+    "Crimean Nursing Graveyard: Soul of the Wet Nurses"
   ],
-  "Dark Stoneplate Ring": [
-    "NF: Dark Stoneplate Ring"
+  "Two-Faced Buckler": [
+    "Crimean Nursing Graveyard: Two-Faced Buckler"
   ],
-  "Four-leaf Clover Ring": [
-    "NF: Four-leaf Clover Ring"
+  "Unbreakable Ring": [
+    "Crimean Nursing Graveyard: Unbreakable Ring"
   ],
-  "Drake Sword": [
-    "NF: Drake Sword"
+  "Whittled Ring": [
+    "Crimean Nursing Graveyard: Whittled Ring"
   ],
-  "Fairy Tale [The Gigantic Turnip]": [
-    "NF: Fairy Tale [The Gigantic Turnip]"
+  "Yellow Cloth": [
+    "Crimean Nursing Graveyard: Yellow Cloth"
   ],
-  "Adultery Ring": [
-    "ASH: Adultery Ring"
+  "Aristocrat's Clothes": [
+    "DM: Aristocrat's Clothes"
   ],
-  "Soul of Distraction": [
-    "LT: Soul of Distraction"
-  ],
-  "Fairy Tale [The Ugly Duckling]": [
-    "LT: Fairy Tale [The Ugly Duckling]"
-  ],
-  "Gate Pass": [
-    "RGC: Gate Pass"
-  ],
-  "Target Shield": [
-    "GotH: Target Shield"
-  ],
-  "Sorcery [Omniblow]": [
-    "GotH: Sorcery [Omniblow]"
-  ],
-  "Fairy Tale [The Fox and The Grapes]": [
-    "GotH: Fairy Tale [The Fox and The Grapes]"
-  ],
-  "Poser's Ring": [
-    "GotH: Poser's Ring"
-  ],
-  "Phantom Thief's Mantle": [
-    "GotH: Phantom Thief's Mantle"
-  ],
-  "Cloak of the Frenzy King": [
-    "RCF: Cloak of the Frenzy King"
-  ],
-  "Sorcery [Critical Strike]": [
-    "RCF: Sorcery [Critical Strike]"
-  ],
-  "Champion's Ring": [
-    "RCF: Champion's Ring"
-  ],
-  "Red Shield": [
-    "RCF: Red Shield"
-  ],
-  "Sorcery [Grit]": [
-    "RCF: Sorcery [Grit]"
-  ],
-  "Morgenstern": [
-    "RCF: Morgenstern"
-  ],
-  "Dega's Great Shield": [
-    "RCF: Dega's Great Shield"
-  ],
-  "Lawyer's Mask": [
-    "RCF: Lawyer's Mask"
-  ],
-  "Templar Shield": [
-    "RCF: Templar Shield"
-  ],
-  "Armor of Milton": [
-    "RCF: Armor of Milton"
-  ],
-  "Helm of Milton": [
-    "RCF: Helm of Milton"
-  ],
-  "Soul of the Knight of Spades": [
-    "RCF: Soul of the Knight of Spades"
-  ],
-  "Soul of the Knight of Hearts": [
-    "RCF: Soul of the Knight of Hearts"
-  ],
-  "Soul of the Knight of Clubs": [
-    "RCF: Soul of the Knight of Clubs"
-  ],
-  "Fairy Tale [The King with Donkey Ears]": [
-    "RCF: Fairy Tale [The King with Donkey Ears]"
-  ],
-  "Soul of the Old Knight": [
-    "SF: Soul of the Old Knight"
-  ],
-  "Great Sword": [
-    "SF: Great Sword"
-  ],
-  "Fairy Tale [Knight in Armor]": [
-    "SF: Fairy Tale [Knight in Armor]"
+  "Cloak of Violence": [
+    "DM: Cloak of Violence"
   ],
   "Knight's Armor": [
     "DM: Knight's Armor"
@@ -553,125 +171,26 @@
   "Knight's Sword": [
     "DM: Knight's Sword"
   ],
+  "Ogre Ring": [
+    "DM: Ogre Ring"
+  ],
   "Ring of Rebellion": [
     "DM: Ring of Rebellion"
-  ],
-  "Aristocrat's Clothes": [
-    "DM: Aristocrat's Clothes"
-  ],
-  "Cloak of Violence": [
-    "DM: Cloak of Violence"
   ],
   "Train Ticket": [
     "DM: Train Ticket"
   ],
-  "Ring of the Wall": [
-    "IF: Ring of the Wall"
+  "Warhammer": [
+    "DM: Warhammer"
   ],
-  "Puppet's Ring": [
-    "IF: Puppet's Ring"
+  "Deep Sea Knight's Armor": [
+    "DS: Deep Sea Knight's Armor"
   ],
-  "Wonder Hat": [
-    "IF: Wonder Hat"
+  "Deep Sea Knight's Helm": [
+    "DS: Deep Sea Knight's Helm"
   ],
-  "Grass Crest Shield": [
-    "IF: Grass Crest Shield"
-  ],
-  "Soul of the Pregnant Cake": [
-    "IF: Soul of the Pregnant Cake"
-  ],
-  "Fairy Tale [Hansel and Gretel]": [
-    "IF: Fairy Tale [Hansel and Gretel]"
-  ],
-  "Soul of the Butcher": [
-    "SH: Soul of the Butcher"
-  ],
-  "Butcher's Ring": [
-    "SH: Butcher's Ring"
-  ],
-  "Fairy Tale [Musicians of Bremen]": [
-    "SH: Fairy Tale [Musicians of Bremen]"
-  ],
-  "Ring of Reckless Hero": [
-    "SH: Ring of Reckless Hero"
-  ],
-  "Mosquito Ring": [
-    "ASH: Mosquito Ring"
-  ],
-  "Ring of the Clown Murderer": [
-    "QL: Ring of the Clown Murderer"
-  ],
-  "Mirror Greatshield": [
-    "QL: Mirror Greatshield"
-  ],
-  "Shield of the Abyss": [
-    "QL: Shield of the Abyss"
-  ],
-  "Fairy Tale [Pooh Bear]": [
-    "QL: Fairy Tale [Pooh Bear]"
-  ],
-  "Fairy Tale [Daddy-Long-Legs]": [
-    "QL: Fairy Tale [Daddy-Long-Legs]"
-  ],
-  "Soul of the Slave Emperor": [
-    "QL: Soul of the Slave Emperor"
-  ],
-  "Soul of the Slave Empress": [
-    "QL: Soul of the Slave Empress"
-  ],
-  "Leaf's Ring": [
-    "QL: Leaf's Ring"
-  ],
-  "Soul of the Bellcaller": [
-    "BFM: Soul of the Bellcaller"
-  ],
-  "Fairy Tale [Adventures of Sinbad]": [
-    "BFM: Fairy Tale [Adventures of Sinbad]"
-  ],
-  "Cannibal's Shield": [
-    "BoG: Cannibal's Shield"
-  ],
-  "Soul of the Giant's Home": [
-    "MV: Soul of the Giant's Home"
-  ],
-  "Fairy Tale [Goose That Laid Golden Eggs]": [
-    "CR: Fairy Tale [Goose That Laid Golden Eggs]"
-  ],
-  "Ring of Goddess": [
-    "CR: Ring of Goddess"
-  ],
-  "Mock Turtle's Ladle": [
-    "BoG: Mock Turtle's Ladle"
-  ],
-  "Sorcery [Requiem]": [
-    "ORS: Sorcery [Requiem]"
-  ],
-  "Pirate Handgun": [
-    "ORS: Pirate Handgun"
-  ],
-  "Andor Sword": [
-    "ORS: Andor Sword"
-  ],
-  "Ring of the Reaper": [
-    "ORS: Ring of the Reaper"
-  ],
-  "Walrus Ring": [
-    "ORS: Walrus Ring"
-  ],
-  "Shell Shield": [
-    "ORS: Shell Shield"
-  ],
-  "Helmet of Onimusha": [
-    "SG: Helmet of Onimusha"
-  ],
-  "Uchigatana": [
-    "SG: Uchigatana"
-  ],
-  "Armor of Onimusha": [
-    "SG: Armor of Onimusha"
-  ],
-  "Sailor's Bandana": [
-    "SG: Sailor's Bandana"
+  "Deep Sea Shield": [
+    "DS: Deep Sea Shield"
   ],
   "Ring of Sin": [
     "DS: Ring of Sin"
@@ -679,57 +198,368 @@
   "Sorcery [Power Within]": [
     "DS: Sorcery [Power Within]"
   ],
-  "Deep Sea Shield": [
-    "DS: Deep Sea Shield"
-  ],
-  "Fairy Tale [Bluebeard]": [
-    "PoBT: Fairy Tale [Bluebeard]"
-  ],
   "Soul of the Deep Sea Knight": [
     "DS: Soul of the Deep Sea Knight"
   ],
-  "Deep Sea Knight's Helm": [
-    "DS: Deep Sea Knight's Helm"
+  "Blackbeard's Ring": [
+    "Deep Sea: Blackbeard's Ring"
   ],
-  "Deep Sea Knight's Armor": [
-    "DS: Deep Sea Knight's Armor"
+  "Covenant: Kuti": [
+    "Deep Sea: Covenant: Kuti"
+  ],
+  "Mist Deep Sea": [
+    "Deep Sea: Mist Deep Sea"
+  ],
+  "Mist Dodgson Bridge": [
+    "Dodgson Bridge: Mist Dodgson Bridge"
+  ],
+  "Mist Duchess' Mansion": [
+    "Duchess' Mansion: Mist Duchess' Mansion"
+  ],
+  "Covenant: Hatta": [
+    "Endless Tea Party: Covenant: Hatta"
+  ],
+  "Armor of the Sun": [
+    "FF: Armor of the Sun"
+  ],
+  "Banker's Ring": [
+    "FF: Banker's Ring"
+  ],
+  "Claymore": [
+    "FF: Claymore"
+  ],
+  "Fairy Tale [Mt. Kachi Kachi]": [
+    "FF: Fairy Tale [Mt. Kachi Kachi]"
+  ],
+  "Fairy Tale [Robin Hood]": [
+    "FF: Fairy Tale [Robin Hood]"
+  ],
+  "Flame Stoneplate Ring": [
+    "FF: Flame Stoneplate Ring",
+    "SH: Flame Stoneplate Ring"
+  ],
+  "Folk Tale [Jeanne d'Arc]": [
+    "FF: Folk Tale [Jeanne d'Arc]"
+  ],
+  "Holy Knight's Shield": [
+    "FF: Holy Knight's Shield"
+  ],
+  "Soul of the Bandersnatch": [
+    "FF: Soul of the Bandersnatch"
   ],
   "Fairy Tale [Pinocchio]": [
     "Fairy Tale [Pinocchio]"
   ],
+  "Mist Florence Arena": [
+    "Florence Arena: Mist Florence Arena"
+  ],
+  "Covenant: Bandersnatch": [
+    "FF: Covenant: Bandersnatch"
+  ],
+  "Mist Fuming Forest": [
+    "Fuming Forest: Mist Fuming Forest"
+  ],
+  "Covenant: Queen of Hearts": [
+    "Garden of the Heart: Covenant: Queen of Hearts"
+  ],
+  "Fairy Tale [The Fox and The Grapes]": [
+    "GotH: Fairy Tale [The Fox and The Grapes]"
+  ],
+  "Phantom Thief's Mantle": [
+    "GotH: Phantom Thief's Mantle"
+  ],
+  "Poser's Ring": [
+    "GotH: Poser's Ring"
+  ],
+  "Sorcery [Omniblow]": [
+    "GotH: Sorcery [Omniblow]"
+  ],
+  "Target Shield": [
+    "GotH: Target Shield"
+  ],
+  "Black Sword": [
+    "IF: Black Sword"
+  ],
+  "Fairy Tale [Hansel and Gretel]": [
+    "IF: Fairy Tale [Hansel and Gretel]"
+  ],
+  "Grass Crest Shield": [
+    "IF: Grass Crest Shield"
+  ],
   "Poisonbite Ring": [
-    "RGC: Poisonbite Ring",
-    "IF: Poisonbite Ring"
-  ],
-  "Prickett's Ring": [
-    "QL: Prickett's Ring"
-  ],
-  "Sorcery [Dark Side Moon]": [
-    "RCF: Sorcery [Dark Side Moon]"
-  ],
-  "Knuckles": [
-    "BFM: Knuckles"
-  ],
-  "Sorcery [Hidden Body]": [
-    "BFM: Sorcery [Hidden Body]"
-  ],
-  "Warrior's Round Shield": [
-    "PoBT: Warrior's Round Shield"
-  ],
-  "Shoeshiner's Ring": [
-    "BFM: Shoeshiner's Ring"
-  ],
-  "Cannon": [
-    "BFM: Cannon"
-  ],
-  "Miracle Ring": [
-    "OWU: Miracle Ring"
+    "IF: Poisonbite Ring",
+    "RGC: Poisonbite Ring"
   ],
   "Pumpkin Knight's Ring": [
     "IF: Pumpkin Knight's Ring"
   ],
-  "Kite Shield": [
-    "RGC: Kite Shield"
+  "Puppet's Ring": [
+    "IF: Puppet's Ring"
+  ],
+  "Ring of Draconic Blessing": [
+    "IF: Ring of Draconic Blessing"
+  ],
+  "Ring of the Wall": [
+    "IF: Ring of the Wall"
+  ],
+  "Soul of the Pregnant Cake": [
+    "IF: Soul of the Pregnant Cake"
+  ],
+  "Wonder Hat": [
+    "IF: Wonder Hat"
+  ],
+  "Mist Infinite Food": [
+    "Infinite Food: Mist Infinite Food"
+  ],
+  "Mist Jabberwock's Lair": [
+    "Jabberwock's Lair: Mist Jabberwock's Lair"
+  ],
+  "Mist Jubjub's Nest": [
+    "Jubjub's Nest: Mist Jubjub's Nest"
+  ],
+  "Cloak of Shadows": [
+    "LC: Cloak of Shadows"
+  ],
+  "Fairy Tale [Wolf and ××× Young Goats]": [
+    "LC: Fairy Tale [Wolf and ××× Young Goats]"
+  ],
+  "Iron Round Shield": [
+    "LC: Iron Round Shield"
+  ],
+  "Ring of Life": [
+    "LC: Ring of Life"
+  ],
+  "Thief's Dagger": [
+    "LC: Thief's Dagger"
+  ],
+  "Thief's Mask": [
+    "LC: Thief's Mask"
+  ],
+  "Viper's Clothing": [
+    "LC: Viper's Clothing"
+  ],
+  "Butcher's Chainsaw": [
+    "LD: Butcher's Chainsaw (exchange for Soul of the Butcher)"
+  ],
+  "Deep Sea Knight's Anchor": [
+    "LD: Deep Sea Knight's Anchor (exchange for Soul of the Deep Sea Knight)"
+  ],
+  "Fairy Tale [Rascal]": [
+    "LD: Fairy Tale [Rascal]"
+  ],
+  "God Fish's Ring": [
+    "LD: God Fish's Ring (exchange for Soul of the God's Odd Fish)"
+  ],
+  "Golden Ring of Avarice": [
+    "LD: Golden Ring of Avarice"
+  ],
+  "Guardian Angel": [
+    "LD: Guardian Angel (exchange for Soul of the Wet Nurses)"
+  ],
+  "Holy Gunblade": [
+    "LD: Holy Gunblade (exchange for Soul of Florence)"
+  ],
+  "Knight of Clubs' Ring": [
+    "LD: Knight of Clubs' Ring (exchange for Soul of the Knight of Clubs)"
+  ],
+  "Knight of Hearts' Ring": [
+    "LD: Knight of Hearts' Ring (exchange for Soul of the Knight of Hearts)"
+  ],
+  "Knight of Spades' Ring": [
+    "LD: Knight of Spades' Ring (exchange for Soul of the Knight of Spades)"
+  ],
+  "Leiden's Twin Axes": [
+    "LD: Leiden's Twin Axes (exchange for Soul of the White Lion)"
+  ],
+  "Mad Bow Jubjub": [
+    "LD: Mad Bow Jubjub (exchange for Soul of the Jubjub)"
+  ],
+  "Manslayer's Shotgun": [
+    "LD: Manslayer's Shotgun (exchange for Soul of Jack)"
+  ],
+  "Porcupine Shield": [
+    "LD: Porcupine Shield (exchange for Soul of Distraction)"
+  ],
+  "Ring of Heaven": [
+    "LD: Ring of Heaven (exchange for Soul of the Bright Star)",
+    "OWU: Ring of Heaven"
+  ],
+  "Ring of Steel Protection": [
+    "LD: Ring of Steel Protection (exchange for Soul of the Gray Eagle)",
+    "LT: Ring of Steel Protection"
+  ],
+  "Rotten Scythe Jabberwock": [
+    "LD: Rotten Scythe Jabberwock (exchange for Soul of the Jabberwock)"
+  ],
+  "Silver Ring of Avarice": [
+    "LD: Silver Ring of Avarice"
+  ],
+  "Sorcery [Ghostfire]": [
+    "LD: Sorcery [Ghostfire] (exchange for Soul of the Bellcaller)"
+  ],
+  "Sorcery [Omnicurse]": [
+    "LD: Sorcery [Omnicurse] (exchange for Soul of Queen of Torture Tools)"
+  ],
+  "Sorcery [Rampage]": [
+    "LD: Sorcery [Rampage] (exchange for Soul of Conceit)"
+  ],
+  "Spell Stoneplate Ring": [
+    "LD: Spell Stoneplate Ring (exchange for Soul of the Pregnant Cake)",
+    "MW: Spell Stoneplate Ring"
+  ],
+  "Tyrant Ring": [
+    "LD: Tyrant Ring"
+  ],
+  "Unis' Rapier": [
+    "LD: Unis' Rapier (exchange for Soul of the White Unicorn)"
+  ],
+  "Violent Sword Bandersnatch": [
+    "LD: Violent Sword Bandersnatch (exchange for Soul of the Bandersnatch)"
+  ],
+  "Vorpal Blade": [
+    "LD: Vorpal Blade (exchange for Soul of the Head-Hunting Beast)"
+  ],
+  "Windless Wrap": [
+    "LD: Windless Wrap (exchange for Soul of the Winterbell's Wind)"
+  ],
+  "Angel's Ring": [
+    "LT: Angel's Ring"
+  ],
+  "Beasthunter Saw": [
+    "LT: Beasthunter Saw"
+  ],
+  "Evil Eye Ring": [
+    "LT: Evil Eye Ring"
+  ],
+  "Fairy Tale Scrap Three": [
+    "LT: Fairy Tale Scrap Three"
+  ],
+  "Fairy Tale Scrap Two": [
+    "LT: Fairy Tale Scrap Two"
+  ],
+  "Fairy Tale [The Little Match Girl]": [
+    "LT: Fairy Tale [The Little Match Girl]"
+  ],
+  "Fairy Tale [The Ugly Duckling]": [
+    "LT: Fairy Tale [The Ugly Duckling]"
+  ],
+  "Hachigane": [
+    "LT: Hachigane"
+  ],
+  "Hunter's Attire": [
+    "LT: Hunter's Attire"
+  ],
+  "Leather Armor": [
+    "LT: Leather Armor"
+  ],
+  "Match-Seller's Clothes": [
+    "LT: Match-Seller's Clothes"
+  ],
+  "Ring of Fear": [
+    "LT: Ring of Fear"
+  ],
+  "Ring of the Enduring": [
+    "LT: Ring of the Enduring"
+  ],
+  "Round Shield": [
+    "LT: Round Shield"
+  ],
+  "Silver Pistol": [
+    "LT: Silver Pistol"
+  ],
+  "Sorcery [Flame]": [
+    "LT: Sorcery [Flame]"
+  ],
+  "Sorcery [Tearing Grudge]": [
+    "LT: Sorcery [Tearing Grudge]"
+  ],
+  "Soul of Distraction": [
+    "LT: Soul of Distraction"
+  ],
+  "Covenant: Node": [
+    "LD: Covenant: Node"
+  ],
+  "Mist Library Dream": [
+    "LD: Mist Library Dream"
+  ],
+  "Mist Liddell Cemetary": [
+    "LC: Mist Liddell Cemetary"
+  ],
+  "Halberd": [
+    "MV: Halberd"
+  ],
+  "Hunter's Bow": [
+    "MV: Hunter's Bow"
+  ],
+  "Sorcery [Green Power]": [
+    "MV: Sorcery [Green Power]"
+  ],
+  "Soul of the Giant's Home": [
+    "MV: Soul of the Giant's Home"
+  ],
+  "Dusk Crown Ring": [
+    "MW: Dusk Crown Ring"
+  ],
+  "Edith's Ring": [
+    "MW: Edith's Ring"
+  ],
+  "Fairy Tale [Iron Hans]": [
+    "MW: Fairy Tale [Iron Hans]"
+  ],
+  "Fairy Tale [Wizard of Oz]": [
+    "MW: Fairy Tale [Wizard of Oz]"
+  ],
+  "Hans' Machine Gun": [
+    "MW: Hans' Machine Gun"
+  ],
+  "Plate Mail": [
+    "MW: Plate Mail"
+  ],
+  "Sniper's Ring": [
+    "MW: Sniper's Ring"
+  ],
+  "Sorcerer's Staff": [
+    "MW: Sorcerer's Staff",
+    "RGC: Sorcerer's Staff"
+  ],
+  "Sorcery [Ruinous Storm]": [
+    "MW: Sorcery [Ruinous Storm]"
+  ],
+  "Soul of the Gray Eagle": [
+    "MW: Soul of the Gray Eagle"
+  ],
+  "Storm Ruler": [
+    "MW: Storm Ruler"
+  ],
+  "Toto's Ring": [
+    "MW: Toto's Ring"
+  ],
+  "Covenant: Tweedledee & Tweedledum": [
+    "MW: Covenant: Tweedledee & Tweedledum"
+  ],
+  "Mist Mental Ward": [
+    "MW: Mist Mental Ward"
+  ],
+  "Mist Mushroom Village": [
+    "Mushroom Village: Mist Mushroom Village"
+  ],
+  "Angel's Raiment": [
+    "NF: Angel's Raiment"
+  ],
+  "Brick Shield": [
+    "NF: Brick Shield"
+  ],
+  "Dark Stoneplate Ring": [
+    "NF: Dark Stoneplate Ring"
+  ],
+  "Drake Sword": [
+    "NF: Drake Sword"
+  ],
+  "Fairy Tale [The Gigantic Turnip]": [
+    "NF: Fairy Tale [The Gigantic Turnip]"
+  ],
+  "Four-leaf Clover Ring": [
+    "NF: Four-leaf Clover Ring"
   ],
   "Igor's Mask": [
     "NF: Igor's Mask"
@@ -740,110 +570,414 @@
   "Miracle [Soul Shield]": [
     "NF: Miracle [Soul Shield]"
   ],
-  "Black Sword": [
-    "IF: Black Sword"
+  "Ring of the Abyss": [
+    "NF: Ring of the Abyss"
   ],
-  "Ring of Draconic Blessing": [
-    "IF: Ring of Draconic Blessing"
+  "Andor Sword": [
+    "ORS: Andor Sword"
   ],
-  "Mock Turtle's Shell": [
-    "BoG: Mock Turtle's Shell"
+  "Pirate Handgun": [
+    "ORS: Pirate Handgun"
   ],
-  "Griffin Shield": [
-    "BoG: Griffin Shield"
+  "Ring of the Reaper": [
+    "ORS: Ring of the Reaper"
+  ],
+  "Shell Shield": [
+    "ORS: Shell Shield"
+  ],
+  "Sorcery [Requiem]": [
+    "ORS: Sorcery [Requiem]"
+  ],
+  "Thunder Stoneplate Ring": [
+    "ORS: Thunder Stoneplate Ring",
+    "SF: Thunder Stoneplate Ring"
+  ],
+  "Walrus Ring": [
+    "ORS: Walrus Ring"
+  ],
+  "Black Vanguard's Shield": [
+    "OWU: Black Vanguard's Shield"
+  ],
+  "Demon's Catalyst": [
+    "OWU: Demon's Catalyst"
+  ],
+  "Folk Tale [Saint of Alexandria]": [
+    "OWU: Folk Tale [Saint of Alexandria]"
+  ],
+  "Miracle Ring": [
+    "OWU: Miracle Ring"
+  ],
+  "Miracle [Cure]": [
+    "OWU: Miracle [Cure]"
+  ],
+  "Miracle [Erase]": [
+    "OWU: Miracle [Erase]"
+  ],
+  "Ring of Vanity": [
+    "OWU: Ring of Vanity"
+  ],
+  "Sorcery [Divine Beast's Thunder]": [
+    "OWU: Sorcery [Divine Beast's Thunder]"
+  ],
+  "Soul of the Dean": [
+    "OWU: Soul of the Dean"
+  ],
+  "Mist Ox Ward University": [
+    "Ox Ward University: Mist Ox Ward University"
+  ],
+  "Covenant: Walrus": [
+    "Oysters' Rotted Sea: Covenant: Walrus"
+  ],
+  "Blade Shield": [
+    "PoBT: Blade Shield"
+  ],
+  "Bloodbite Ring": [
+    "PoBT: Bloodbite Ring"
+  ],
+  "Club": [
+    "PoBT: Club"
+  ],
+  "Fairy Tale [Bluebeard]": [
+    "PoBT: Fairy Tale [Bluebeard]"
+  ],
+  "Folk Tale [Elizabeth Bathory]": [
+    "PoBT: Folk Tale [Elizabeth Bathory]"
+  ],
+  "Magician Hat": [
+    "PoBT: Magician Hat"
+  ],
+  "Magician's Coat": [
+    "PoBT: Magician's Coat"
+  ],
+  "Red Tearstone Ring": [
+    "PoBT: Red Tearstone Ring"
+  ],
+  "Ring of Iron Maiden": [
+    "PoBT: Ring of Iron Maiden"
+  ],
+  "Ring of the Edge": [
+    "PoBT: Ring of the Edge"
+  ],
+  "Sorcery [Divine Lightning]": [
+    "PoBT: Sorcery [Divine Lightning]"
+  ],
+  "Sorcery [Meteor Shower]": [
+    "PoBT: Sorcery [Meteor Shower]"
+  ],
+  "Soul of Queen of Torture Tools": [
+    "PoBT: Soul of Queen of Torture Tools"
+  ],
+  "Viking Helm": [
+    "PoBT: Viking Helm"
+  ],
+  "Warrior's Round Shield": [
+    "PoBT: Warrior's Round Shield"
+  ],
+  "Bunker Shield": [
+    "PoF: Bunker Shield"
+  ],
+  "Cheshire Cat's Ring": [
+    "PoF: Cheshire Cat's Ring"
+  ],
+  "Hornet Ring": [
+    "PoF: Hornet Ring"
+  ],
+  "Covenant: Dodo": [
+    "PoBT: Covenant: Dodo"
+  ],
+  "Mist Pond of Bloody Tears": [
+    "PoBT: Mist Pond of Bloody Tears"
+  ],
+  "Fairy Tale [Daddy-Long-Legs]": [
+    "QL: Fairy Tale [Daddy-Long-Legs]"
+  ],
+  "Fairy Tale [Pooh Bear]": [
+    "QL: Fairy Tale [Pooh Bear]"
+  ],
+  "Leaf's Ring": [
+    "QL: Leaf's Ring"
+  ],
+  "Mirror Greatshield": [
+    "QL: Mirror Greatshield"
+  ],
+  "Prickett's Ring": [
+    "QL: Prickett's Ring"
+  ],
+  "Ring of the Clown Murderer": [
+    "QL: Ring of the Clown Murderer"
+  ],
+  "Shield of the Abyss": [
+    "QL: Shield of the Abyss"
+  ],
+  "Soul of the Slave Emperor": [
+    "QL: Soul of the Slave Emperor"
+  ],
+  "Soul of the Slave Empress": [
+    "QL: Soul of the Slave Empress"
+  ],
+  "Covenant: Best Girl Prickett": [
+    "QL: Covenant: Best Girl Prickett"
+  ],
+  "Mist Queensland": [
+    "QL: Mist Queensland"
+  ],
+  "Armor of Milton": [
+    "RCF: Armor of Milton"
+  ],
+  "Champion's Ring": [
+    "RCF: Champion's Ring"
+  ],
+  "Cloak of the Frenzy King": [
+    "RCF: Cloak of the Frenzy King"
+  ],
+  "Dega's Great Shield": [
+    "RCF: Dega's Great Shield"
+  ],
+  "Fairy Tale [The King with Donkey Ears]": [
+    "RCF: Fairy Tale [The King with Donkey Ears]"
+  ],
+  "Helm of Milton": [
+    "RCF: Helm of Milton"
+  ],
+  "Lawyer's Mask": [
+    "RCF: Lawyer's Mask"
+  ],
+  "Morgenstern": [
+    "RCF: Morgenstern"
+  ],
+  "Red Shield": [
+    "RCF: Red Shield"
+  ],
+  "Sorcery [Critical Strike]": [
+    "RCF: Sorcery [Critical Strike]"
+  ],
+  "Sorcery [Dark Side Moon]": [
+    "RCF: Sorcery [Dark Side Moon]"
+  ],
+  "Sorcery [Grit]": [
+    "RCF: Sorcery [Grit]"
+  ],
+  "Soul of the Knight of Clubs": [
+    "RCF: Soul of the Knight of Clubs"
+  ],
+  "Soul of the Knight of Hearts": [
+    "RCF: Soul of the Knight of Hearts"
+  ],
+  "Soul of the Knight of Spades": [
+    "RCF: Soul of the Knight of Spades"
+  ],
+  "Templar Shield": [
+    "RCF: Templar Shield"
+  ],
+  "Blackwell's Letter": [
+    "RGC: Blackwell's Letter"
+  ],
+  "Church Rifle": [
+    "RGC: Church Rifle"
+  ],
+  "Clergy Circlet": [
+    "RGC: Clergy Circlet"
+  ],
+  "Clergy Clothes": [
+    "RGC: Clergy Clothes"
+  ],
+  "Gate Pass": [
+    "RGC: Gate Pass"
+  ],
+  "Kite Shield": [
+    "RGC: Kite Shield"
+  ],
+  "Mace": [
+    "RGC: Mace"
+  ],
+  "Sorcery Ring": [
+    "RGC: Sorcery Ring"
+  ],
+  "Sorcery [Bloody Carthus]": [
+    "RGC: Sorcery [Bloody Carthus]"
+  ],
+  "Buckler": [
+    "RH: Buckler"
+  ],
+  "Butcher Greataxe": [
+    "RH: Butcher Greataxe"
+  ],
+  "Fairy Tale [Black Rabbit of Inaba]": [
+    "RH: Fairy Tale [Black Rabbit of Inaba]"
+  ],
+  "Moonlight Greatsword": [
+    "RH: Moonlight Greatsword"
+  ],
+  "Sorcery [Phalanx]": [
+    "RH: Sorcery [Phalanx]"
+  ],
+  "Mist Red Castle Frissel": [
+    "Red Castle Frissel: Mist Red Castle Frissel"
+  ],
+  "Covenant: Bill": [
+    "RGC: Covenant: Bill"
+  ],
+  "Mist Riverside": [
+    "CR: Mist Riverside"
+  ],
+  "Armor of the Abyss": [
+    "SCT: Armor of the Abyss"
+  ],
+  "Fairy Tale [The Little Prince]": [
+    "SCT: Fairy Tale [The Little Prince]"
+  ],
+  "Gear of Madness": [
+    "SCT: Gear of Madness"
+  ],
+  "Soul of the Bright Star": [
+    "SCT: Soul of the Bright Star"
+  ],
+  "Soul of the Jubjub": [
+    "SCT: Soul of the Jubjub"
+  ],
+  "Tinkerbell's Ring": [
+    "SCT: Tinkerbell's Ring"
+  ],
+  "Troll Ring": [
+    "SCT: Troll Ring"
+  ],
+  "Fairy Tale [Knight in Armor]": [
+    "SF: Fairy Tale [Knight in Armor]"
+  ],
+  "Great Sword": [
+    "SF: Great Sword"
+  ],
+  "Miracle [Providence]": [
+    "SF: Miracle [Providence]"
+  ],
+  "Mushroom Shield": [
+    "SF: Mushroom Shield"
+  ],
+  "Sorcery [Mana Drain]": [
+    "SF: Sorcery [Mana Drain]"
+  ],
+  "Soul of the Old Knight": [
+    "SF: Soul of the Old Knight"
+  ],
+  "Wind God's Ring": [
+    "SF: Wind God's Ring"
+  ],
+  "Armor of Onimusha": [
+    "SG: Armor of Onimusha"
+  ],
+  "Helmet of Onimusha": [
+    "SG: Helmet of Onimusha"
+  ],
+  "Sailor's Bandana": [
+    "SG: Sailor's Bandana"
+  ],
+  "Uchigatana": [
+    "SG: Uchigatana"
+  ],
+  "Apple Ring": [
+    "SH: Apple Ring"
+  ],
+  "Armor of Babel": [
+    "SH: Armor of Babel"
+  ],
+  "Butcher's Ring": [
+    "SH: Butcher's Ring"
+  ],
+  "Fairy Tale [Musicians of Bremen]": [
+    "SH: Fairy Tale [Musicians of Bremen]"
+  ],
+  "Helmet of Babel": [
+    "SH: Helmet of Babel"
+  ],
+  "Knight's Ring": [
+    "SH: Knight's Ring"
+  ],
+  "Partisan": [
+    "SH: Partisan"
+  ],
+  "Resurrectionist's Ring": [
+    "SH: Resurrectionist's Ring"
+  ],
+  "Ring of My Struggle": [
+    "SH: Ring of My Struggle"
+  ],
+  "Ring of Reckless Hero": [
+    "SH: Ring of Reckless Hero"
+  ],
+  "Sloppy": [
+    "SH: Sloppy"
+  ],
+  "Soul of the Butcher": [
+    "SH: Soul of the Butcher"
+  ],
+  "Squishy": [
+    "SH: Squishy"
+  ],
+  "Soul of the God's Odd Fish": [
+    "Ship Graveyard: Soul of the God's Odd Fish"
+  ],
+  "Mist Sick Clock Tower": [
+    "Sick Clock Tower: Mist Sick Clock Tower"
+  ],
+  "Mist Slaughterhouse": [
+    "Slaughterhouse: Mist Slaughterhouse"
+  ],
+  "Mist Spore Forest": [
+    "SF: Mist Spore Forest"
   ],
   "Barber's Ring": [
     "ULT: Barber's Ring"
   ],
-  "Ogre Ring": [
-    "DM: Ogre Ring"
-  ],
-  "Warhammer": [
-    "DM: Warhammer"
-  ],
   "Bunny Headpiece": [
     "ULT: Bunny Headpiece"
   ],
-  "God's Angels": [
-    "Crimean Nursing Graveyard: God's Angels"
+  "Exorcist's Ring": [
+    "ULT: Exorcist's Ring"
   ],
-  "Fake Angel's Wreath": [
-    "Crimean Nursing Graveyard: Fake Angel's Wreath"
+  "Fairy Tale Scrap One": [
+    "ULT: Fairy Tale Scrap One"
   ],
-  "Miracle [Summon Wall of Flesh]": [
-    "Crimean Nursing Graveyard: Miracle [Summon Wall of Flesh]"
+  "Fairy Tale [Boy Who Cried Wolf]": [
+    "ULT: Fairy Tale [Boy Who Cried Wolf]"
   ],
-  "Yellow Cloth": [
-    "Crimean Nursing Graveyard: Yellow Cloth"
+  "Harlot's Ring": [
+    "ULT: Harlot's Ring"
   ],
-  "Whittled Ring": [
-    "Crimean Nursing Graveyard: Whittled Ring"
+  "Knight's Sword+3": [
+    "ULT: Knight's Sword+3"
   ],
-  "Corpse-Eater's Ring": [
-    "Crimean Nursing Graveyard: Corpse-Eater's Ring"
+  "Sky Knight's Cap": [
+    "ULT: Sky Knight's Cap"
   ],
-  "Almighty Ring": [
-    "Crimean Nursing Graveyard: Almighty Ring"
+  "Sorcery [Treponema]": [
+    "ULT: Sorcery [Treponema]"
   ],
-  "Unbreakable Ring": [
-    "Crimean Nursing Graveyard: Unbreakable Ring"
+  "Soul of Jack": [
+    "ULT: Soul of Jack"
   ],
-  "Soul of Florence": [
-    "Crimean Nursing Graveyard: Soul of Florence"
+  "Mist Upper Lutwidge Town": [
+    "ULT: Mist Upper Lutwidge Town"
   ],
-  "Sorcery [Shadowy Bog]": [
-    "Crimean Nursing Graveyard: Sorcery [Shadowy Bog]"
+  "Black Knight's Ring": [
+    "White Castletown: Black Knight's Ring"
   ],
-  "Sorcery [Acid Rain]": [
-    "Crimean Nursing Graveyard: Sorcery [Acid Rain]"
-  ],
-  "Holy Gunblade": [
-    "LD: Holy Gunblade (exchange for Soul of Florence)"
-  ],
-  "Unis' Rapier": [
-    "LD: Unis' Rapier (exchange for Soul of the White Unicorn)"
-  ],
-  "Leiden's Twin Axes": [
-    "LD: Leiden's Twin Axes (exchange for Soul of the White Lion)"
+  "Counter Ring": [
+    "White Castletown: Counter Ring"
   ],
   "Cross Greatshield": [
     "White Castletown: Cross Greatshield"
   ],
-  "Guardian Angel": [
-    "LD: Guardian Angel (exchange for Soul of the Wet Nurses)"
-  ],
-  "Windless Wrap": [
-    "LD: Windless Wrap (exchange for Soul of the Winterbell's Wind)"
-  ],
-  "Winter Witch's Coat": [
-    "White Castletown: Winter Witch's Coat"
-  ],
-  "Winter Warrior's Plate": [
-    "White Castletown: Winter Warrior's Plate"
-  ],
-  "Winter Warrior's Helm": [
-    "White Castletown: Winter Warrior's Helm"
-  ],
-  "Unicorn's Ring": [
-    "White Castletown: Unicorn's Ring"
+  "Ice Stoneplate Ring": [
+    "White Castletown: Ice Stoneplate Ring"
   ],
   "Lion's Ring": [
     "White Castletown: Lion's Ring"
   ],
-  "Ice Stoneplate Ring": [
-    "White Castletown: Ice Stoneplate Ring"
-  ],
-  "Old King's Ring": [
-    "Winterbell: Old King's Ring"
-  ],
-  "Polar Bear's Ring": [
-    "Winterbell: Polar Bear's Ring"
+  "Mist White Castletown": [
+    "White Castletown: Mist White Castletown"
   ],
   "Ring of The Indomitable": [
     "White Castletown: Ring of The Indomitable"
-  ],
-  "Counter Ring": [
-    "White Castletown: Counter Ring"
   ],
   "Sorcery [Piercing Ice Pillars]": [
     "White Castletown: Sorcery [Piercing Ice Pillars]"
@@ -851,220 +985,49 @@
   "Sorcery [Ruinous Arrow Rain]": [
     "White Castletown: Sorcery [Ruinous Arrow Rain]"
   ],
+  "Soul of the Winterbell's Wind": [
+    "White Castletown: Soul of the Winterbell's Wind"
+  ],
+  "Unicorn's Ring": [
+    "White Castletown: Unicorn's Ring"
+  ],
+  "Winter Warrior's Helm": [
+    "White Castletown: Winter Warrior's Helm"
+  ],
+  "Winter Warrior's Plate": [
+    "White Castletown: Winter Warrior's Plate"
+  ],
+  "Winter Witch's Coat": [
+    "White Castletown: Winter Witch's Coat"
+  ],
+  "Covenant: Sho": [
+    "Windless Valley: Covenant: Sho"
+  ],
+  "Mist Windless Valley": [
+    "Windless Valley: Mist Windless Valley"
+  ],
+  "Old King's Ring": [
+    "Winterbell: Old King's Ring"
+  ],
+  "Polar Bear's Ring": [
+    "Winterbell: Polar Bear's Ring"
+  ],
   "Sorcery [Serpent's Embrace]": [
     "Winterbell: Sorcery [Serpent's Embrace]"
   ],
   "Sorcery [Soul Stream]": [
     "Winterbell: Sorcery [Soul Stream]"
   ],
-  "Black Knight's Ring": [
-    "White Castletown: Black Knight's Ring"
-  ],
-  "Soul of the God's Odd Fish": [
-    "Ship Graveyard: Soul of the God's Odd Fish"
-  ],
-  "Two-Faced Buckler": [
-    "Crimean Nursing Graveyard: Two-Faced Buckler"
-  ],
-  "Soul of the Winterbell's Wind": [
-    "White Castletown: Soul of the Winterbell's Wind"
-  ],
-  "Soul of the Wet Nurses": [
-    "Crimean Nursing Graveyard: Soul of the Wet Nurses"
-  ],
-  "Blackwell's Letter": [
-    "RGC: Blackwell's Letter"
-  ],
-  "Mystery of Night Sky": [
-    "CD: Mystery of Night Sky (Ashes Reignited)"
-  ],
-  "Mist Crash Chamber": [
-    "Crash Chamber: Mist Crash Chamber"
-  ],
-  "Mist Fuming Forest": [
-    "Fuming Forest: Mist Fuming Forest"
-  ],
-  "Mist Spore Forest": [
-    "Spore Forest: Mist Spore Forest"
-  ],
-  "Mist Dodgson Bridge": [
-    "Dodgson Bridge: Mist Dodgson Bridge"
-  ],
-  "Mist Liddell Cemetary": [
-    "Liddell Cemetary: Mist Liddell Cemetary"
-  ],
-  "Mist Pond of Bloody Tears": [
-    "Pond of Bloody Tears: Mist Pond of Bloody Tears"
-  ],
-  "Mist Mental Ward": [
-    "Mental Ward: Mist Mental Ward"
-  ],
-  "Mist Mushroom Village": [
-    "Mushroom Village: Mist Mushroom Village"
-  ],
-  "Mist Library Dream": [
-    "Library Dream: Mist Library Dream"
-  ],
-  "Mist Upper Lutwidge Town": [
-    "Upper Lutwidge Town: Mist Upper Lutwidge Town"
-  ],
-  "Mist Slaughterhouse": [
-    "Slaughterhouse: Mist Slaughterhouse"
-  ],
-  "Mist Billingsgate Fish Market": [
-    "Billingsgate Fish Market: Mist Billingsgate Fish Market"
-  ],
-  "Mist Ox Ward University": [
-    "Ox Ward University: Mist Ox Ward University"
-  ],
-  "Mist Sick Clock Tower": [
-    "Sick Clock Tower: Mist Sick Clock Tower"
-  ],
-  "Mist Jubjub's Nest": [
-    "Jubjub's Nest: Mist Jubjub's Nest"
-  ],
-  "Mist Riverside": [
-    "Riverside: Mist Riverside"
-  ],
-  "Mist Red Castle Frissel": [
-    "Red Castle Frissel: Mist Red Castle Frissel"
-  ],
-  "Mist Duchess' Mansion": [
-    "Duchess' Mansion: Mist Duchess' Mansion"
-  ],
-  "Mist Infinite Food": [
-    "Infinite Food: Mist Infinite Food"
-  ],
-  "Mist Queensland": [
-    "Queensland: Mist Queensland"
-  ],
-  "Mist Deep Sea": [
-    "Deep Sea: Mist Deep Sea"
-  ],
-  "Mist Crimean Nursing Graveyard": [
-    "Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard"
-  ],
-  "Mist Florence Arena": [
-    "Florence Arena: Mist Florence Arena"
-  ],
-  "Mist Windless Valley": [
-    "Windless Valley: Mist Windless Valley"
-  ],
-  "Mist Black Knight Arena": [
-    "Black Knight Arena: Mist Black Knight Arena"
-  ],
-  "Mist White Castletown": [
-    "White Castletown: Mist White Castletown"
+  "Soul of the White Lion": [
+    "Winterbell: Soul of the White Lion"
   ],
   "Soul of the White Unicorn": [
     "Winterbell: Soul of the White Unicorn"
   ],
-  "Soul of the White Lion": [
-    "Winterbell: Soul of the White Lion"
+  "Sorcery [Omnibless]": [
+    "LD: Sorcery [Omnibless] (exchange for Soul of the Dean)"
   ],
-  "Mist Jabberwock's Lair": [
-    "Jabberwock's Lair: Mist Jabberwock's Lair"
-  ],
-  "Rotten Scythe Jabberwock": [
-    "LD: Rotten Scythe Jabberwock (exchange for Soul of the Jabberwock)"
-  ],
-  "Mad Bow Jubjub": [
-    "LD: Mad Bow Jubjub (exchange for Soul of the Jubjub)"
-  ],
-  "Deep Sea Knight's Anchor": [
-    "LD: Deep Sea Knight's Anchor (exchange for Soul of the Deep Sea Knight)"
-  ],
-  "Butcher's Chainsaw": [
-    "LD: Butcher's Chainsaw (exchange for Soul of the Butcher)"
-  ],
-  "Violent Sword Bandersnatch": [
-    "LD: Violent Sword Bandersnatch (exchange for Soul of the Bandersnatch)"
-  ],
-  "Porcupine Shield": [
-    "LD: Porcupine Shield (exchange for Soul of Distraction)"
-  ],
-  "Manslayer's Shotgun": [
-    "LD: Manslayer's Shotgun (exchange for Soul of Jack)"
-  ],
-  "Knight of Spades' Ring": [
-    "LD: Knight of Spades' Ring (exchange for Soul of the Knight of Spades)"
-  ],
-  "Knight of Hearts' Ring": [
-    "LD: Knight of Hearts' Ring (exchange for Soul of the Knight of Hearts)"
-  ],
-  "Knight of Clubs' Ring": [
-    "LD: Knight of Clubs' Ring (exchange for Soul of the Knight of Clubs)"
-  ],
-  "God Fish's Ring": [
-    "LD: God Fish's Ring (exchange for Soul of the God's Odd Fish)"
-  ],
-  "Arbiter's Scythe": [
-    "ASH: Arbiter's Scythe"
-  ],
-  "Vorpal Blade": [
-    "LD: Vorpal Blade (exchange for Soul of the Head-Hunting Beast)"
-  ],
-  "Sorcery [Omnicurse]": [
-    "LD: Sorcery [Omnicurse] (exchange for Soul of Queen of Torture Tools)"
-  ],
-  "Sorcery [Ghostfire]": [
-    "LD: Sorcery [Ghostfire] (exchange for Soul of the Bellcaller)"
-  ],
-  "Sorcery [Rampage]": [
-    "LD: Sorcery [Rampage] (exchange for Soul of Conceit)"
-  ],
-  "Blackbeard's Ring": [
-    "Deep Sea: Blackbeard's Ring"
-  ],
-  "Covenant: Node": [
-    "Library Dream: Covenant: Node"
-  ],
-  "Covenant: Bill": [
-    "Ripon Grand Cathedral: Covenant: Bill"
-  ],
-  "Covenant: Dodo": [
-    "Pond of Bloody Tears: Covenant: Dodo"
-  ],
-  "Covenant: Tweedledee & Tweedledum": [
-    "Mental Ward: Covenant: Tweedledee & Tweedledum"
-  ],
-  "Covenant: Capitellar": [
-    "Spore Forest: Covenant: Capitellar"
-  ],
-  "Covenant: Duchess": [
-    "Duchess' Mansion: Covenant: Duchess"
-  ],
-  "Covenant: Mock Turtle": [
-    "Beach of Grief: Covenant: Mock Turtle"
-  ],
-  "Covenant: Walrus": [
-    "Oysters' Rotted Sea: Covenant: Walrus"
-  ],
-  "Covenant: Queen of Hearts": [
-    "Garden of the Heart: Covenant: Queen of Hearts"
-  ],
-  "Covenant: Hatta": [
-    "Endless Tea Party: Covenant: Hatta"
-  ],
-  "Covenant: Maid Victoria": [
-    "Abandoned Station Hanover: Covenant: Maid Victoria"
-  ],
-  "Covenant: Best Girl Prickett": [
-    "Queensland: Covenant: Best Girl Prickett"
-  ],
-  "Covenant: Kuti": [
-    "Deep Sea: Covenant: Kuti"
-  ],
-  "Covenant: Bandersnatch": [
-    "Fuming Forest: Covenant: Bandersnatch"
-  ],
-  "Covenant: Sho": [
-    "Windless Valley: Covenant: Sho"
-  ],
-  "Covenant: Jubjub": [
-    "Sick Clock Tower: Covenant: Jubjub"
-  ],
-  "Covenant: Jabberwock": [
-    "Carroll River: Covenant: Jabberwock"
+  "Sorcery [Stone Flesh]": [
+    "LD: Sorcery [Stone Flesh] (exchange for Soul of the Old Knight)"
   ]
 }
