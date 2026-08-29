@@ -196,18 +196,11 @@ def script_name(entry):
 
 
 def is_our_randomizer(entry):
-    """True if this entry was injected by EITHER mode of this installer.
-    Used so switching modes cleanly replaces rather than stacking scripts."""
     name = script_name(entry).encode("utf-8")
     return any(name.startswith(prefix) for prefix in ALL_NAME_PREFIXES)
 
 
 def patch_scripts_bytes(original_data, source, mod_name, overwrites=None):
-    """overwrites: optional list of (target_script_name, new_source_bytes)
-    or (target_script_name, new_source_bytes, required) tuples to apply
-    via overwrite_named_script_entry, in the SAME pass as the main mod
-    injection, so one verification step covers both. required defaults
-    to True (matches the previous, always-strict behavior) when omitted."""
     entries = load_scripts_bytes(original_data)
     clean = [e for e in entries if not is_our_randomizer(e)]
     main_idx = next((i for i, e in enumerate(clean) if script_name(e) == "Main"), None)
@@ -246,20 +239,6 @@ def clean_scripts_bytes(original_data):
 
 
 def overwrite_named_script_entry(entries, target_name, new_source, required=True):
-    """
-    Replaces an EXISTING script entry's content in place (keeping its
-    original id and name), rather than inserting a new entry. Used for
-    things like overwriting the vanilla Scene_Title to add the Archipelago
-    connect call -- unlike the main mod injection, this touches a script
-    that's already part of the game, so by default it must exist or this
-    raises.
-
-    required=False makes a missing target a silent no-op instead: some
-    overwrites (steam_acheivement) only apply to specific distributions
-    (Steam builds) and are legitimately absent elsewhere (DLsite builds
-    never had Steam integration to begin with) -- for those, a missing
-    target isn't a problem to report, it's the expected, correct state.
-    """
     idx = next((i for i, e in enumerate(entries) if script_name(e) == target_name), None)
     if idx is None:
         if not required:
@@ -501,7 +480,6 @@ def ensure_clean_archive_backup(archive_path):
         cleaned = clean_scripts_bytes(scripts)
         check.replace_entry_by_append(SCRIPTS_ENTRY_NAME, cleaned)
 
-    # Final validation.
     verify = RGSS3AArchive(backup)
     ventry = verify.find_entry(SCRIPTS_ENTRY_NAME)
     ventries = load_scripts_bytes(verify.read_entry(ventry))
@@ -542,9 +520,6 @@ def ensure_clean_backup(game_dir, fmt):
 
 
 def read_backup_original_scripts(fmt, backup_path):
-    """The backup file itself differs by format: for rgss3a it's a full
-    archive (need to pull the scripts entry back out of it), for rvdata2
-    it's already the plain scripts bytes directly."""
     if fmt == FORMAT_RGSS3A:
         archive = RGSS3AArchive(backup_path)
         entry = archive.find_entry(SCRIPTS_ENTRY_NAME)
@@ -595,11 +570,6 @@ def install_randomizer(game_dir, fmt):
             with open(steam_stub_path, "rb") as f:
                 overwrites.append((STEAM_ACHIEVEMENT_ENTRY_NAME, f.read(), False))
         else:
-            # Not every distribution has Steam integration to begin with
-            # (DLsite builds never had a steam_acheivement script at all)
-            # -- that's the expected, correct state for those, not a
-            # problem, so this is an informational note rather than a
-            # warning the person needs to act on.
             warnings.append(
                 f"No '{STEAM_ACHIEVEMENT_ENTRY_NAME}' script found in this game's script list -- "
                 "this is normal for non-Steam distributions (e.g. DLsite), which never had Steam "
@@ -642,7 +612,7 @@ def install_randomizer(game_dir, fmt):
         if idx is None:
             if required:
                 raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
-            continue  # legitimately absent and optional -- nothing to verify
+            continue  
         if zlib.decompress(entries[idx][2]) != new_source:
             raise RuntimeError(f"Final verification failed for overwritten script {target_name!r}.")
 
@@ -652,27 +622,6 @@ def install_randomizer(game_dir, fmt):
 
 
 def copy_archipelago_companion_files(game_dir):
-    """
-    Archipelago_Combined.rb needs a few loose files next to Game.exe that
-    this patcher CANNOT generate for you (they're specific to your AP world
-    build and your server connection details):
-
-      - archipelago.json         (hostname/port/name/password -- read by
-                                   get_connect_details at runtime; NOT the
-                                   same archipelago.json as the .apworld's
-                                   manifest, despite the identical filename)
-      - Ruby/archipelago_rb/...  (the actual Ruby gem, required by
-                                   `require 'archipelago_rb'`)
-      - ap_location_pool.json    (the item-name -> ordered-location-list
-                                   table Archipelago_Combined.rb reads at
-                                   runtime; ships alongside this installer if
-                                   present)
-
-    If ap_location_pool.json is bundled next to this installer, copy it in
-    automatically. Everything else just gets flagged as still-needed in the
-    status message -- this function returns what it could NOT do so the UI
-    can tell the user.
-    """
     still_needed = []
 
     pool_src = app_resource("ap_location_pool.json")
