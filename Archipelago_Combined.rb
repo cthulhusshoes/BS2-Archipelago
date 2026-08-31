@@ -463,6 +463,9 @@ module BS2Randomizer
         "Ring of White Crow" => {93 => "BFM: Ring of White Crow", 26 => "BoG: Ring of White Crow"},
         "Sorcerer's Staff" => {70 => "MW: Sorcerer's Staff", 34 => "RGC: Sorcerer's Staff"},
         "Thunder Stoneplate Ring" => {71 => "SF: Thunder Stoneplate Ring", 118 => "ORS: Thunder Stoneplate Ring"},
+        "Ring of Heaven" => {9 => "OWU: Ring of Heaven", 101 => "LD: Ring of Heaven (exchange for Soul of the Bright Star)"},
+        "Spell Stoneplate Ring" => {66 => "MW: Spell Stoneplate Ring", 101 => "LD: Spell Stoneplate Ring (exchange for Soul of the Pregnant Cake)"},
+        "Ring of Steel Protection" => {131 => "LT: Ring of Steel Protection", 101 => "LD: Ring of Steel Protection (exchange for Soul of the Gray Eagle)"},
     }
 
     $ap_item_occurrence_counters = Hash.new(0)
@@ -542,7 +545,7 @@ module BS2Randomizer
 
     #--------------------------------------------------------------------
     # ** Original (pre-randomization) troop id for a battle command
-    #----------------------------------------------------------------------
+    #--------------------------------------------------------------------
     def self.original_troop_id(interpreter)
         params = interpreter.instance_variable_get(:@params) || []
         if params[0].to_i == 0
@@ -803,6 +806,58 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
+    #--------------------------------------------------------------------
+    # ** Boss arena maps
+    #--------------------------------------------------------------------
+    #--------------------------------------------------------------------
+    BOSS_ARENA_MAP_IDS = [
+        58,   # Dodgson Bridge
+        52,   # CC
+        181,  # LD
+        65,   # PoBT
+        85,   # MW
+        93,   # BFM
+        105,  # SH
+        108,  # Riverside
+        180,  # Jabberwock's Lair
+        137,  # RCF
+        153,  # ULT
+        158,  # Sick Clock Tower
+        43,   # Jubjub's Nest
+        170,  # Queensland
+        40,   # MV
+        83,   # IF
+        141,  # Deep Sea
+        127,  # FF
+        328,  # Crimean Nursing Graveyard
+        329,  # Florence's Arena
+        344,  # Windless Valley
+        350,  # Black Knight's Arena
+        351,  # Unicorn/Lion White Castletown
+        73,   # Spore Forest
+        80,   # DM
+        149,  # OWU
+    ]
+
+    LOCKED_DOOR_TRANSFER_TRIGGERS = {
+        [51, 3] => "Crash Chamber: Entered Rabbit Hole",
+    }
+
+    def self.check_locked_door_transfer_trigger(interpreter)
+        key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
+        location_name = LOCKED_DOOR_TRANSFER_TRIGGERS[key]
+        ArchipelagoLocations.send_check(location_name) if location_name
+    end
+
+    #--------------------------------------------------------------------
+    # ** Locked game-variable-threshold checks
+    #--------------------------------------------------------------------
+    def self.check_locked_variable_trigger(variable_id, threshold, location_name)
+        return unless defined?($game_variables) && $game_variables && $game_variables[variable_id].to_i >= threshold
+        ArchipelagoLocations.send_check(location_name)
+    end
+
+    #--------------------------------------------------------------------
     # ** Boss soul grants via battle victory
     #----------------------------------------------------------------------
     BOSS_SOUL_TROOP_TRIGGERS = {
@@ -815,7 +870,7 @@ module BS2Randomizer
         178 => [['Soul of the Pregnant Cake', 'IF: Soul of the Pregnant Cake']],
         179 => [['Soul of the Bellcaller', 'BFM: Soul of the Bellcaller']],
         180 => [['Soul of the Butcher', 'SH: Soul of the Butcher']],
-        181 => [['Soul of the Gray Eagle', 'MW: Soul of the Gray Eagle']],
+        181 => [['Soul of the Gray Eagle', 'MW: Soul of the Gray Eagle'], ["Edith's Ring", "MW: Edith's Ring"]],
         182 => [['Soul of Conceit', 'CR: Soul of Conceit']],
         183 => [['Soul of Jack', 'ULT: Soul of Jack']],
         185 => [['Soul of the Dean', 'OWU: Soul of the Dean']],
@@ -825,13 +880,13 @@ module BS2Randomizer
             ['Soul of the Knight of Clubs', 'RCF: Soul of the Knight of Clubs'],
         ],
         187 => [['Soul of the Bright Star', 'SCT: Soul of the Bright Star']],
-        192 => [['Soul of the Old Knight', 'SF: Soul of the Old Knight']],
+        192 => [['Soul of the Old Knight', 'SF: Soul of the Old Knight'], ['Great Sword', 'SF: Great Sword']],
         195 => [["Soul of the Giant's Home", "MV: Soul of the Giant's Home"]],
         214 => [['Soul of the Slave Emperor', 'QL: Soul of the Slave Emperor']],
         218 => [['Soul of the Jubjub', 'SCT: Soul of the Jubjub']],
         220 => [['Soul of the Jabberwock', 'CR: Soul of the Jabberwock']],
         373 => [['Soul of the Jabberwock', 'CR: Soul of the Jabberwock']],
-        222 => [['Soul of Queen of Torture Tools', 'PoBT: Soul of Queen of Torture Tools']],
+        222 => [['Soul of Queen of Torture Tools', 'PoBT: Soul of Queen of Torture Tools'], ['Sorcery [Meteor Shower]', 'PoBT: Sorcery [Meteor Shower]']],
         216 => [['Soul of the Bandersnatch', 'FF: Soul of the Bandersnatch']],
         331 => [["Soul of the God's Odd Fish", "Ship Graveyard: Soul of the God's Odd Fish"]],
         341 => [['Soul of the Deep Sea Knight', 'DS: Soul of the Deep Sea Knight']],
@@ -846,6 +901,8 @@ module BS2Randomizer
         115 => [['Empty Ring', 'BFM: Empty Ring']],  # Hollow Soldier Christie
         126 => [["Resurrectionist's Ring", "SH: Resurrectionist's Ring"]],  # Corpse Thief Hare
         127 => [["Knight's Ring", "SH: Knight's Ring"]],  # Fleeing Knight Jim
+        128 => [["Shoeshiner's Ring", "BFM: Shoeshiner's Ring"]],
+        159 => [['Sorcery [Requiem]', 'ORS: Sorcery [Requiem]']],
         139 => [['Ring of Goddess', 'CR: Ring of Goddess']],  # Wainwright the Sinful
         152 => [['Dusk Crown Ring', 'MW: Dusk Crown Ring']],  # Dark Doctor Harold
         171 => [["Barber's Ring", "ULT: Barber's Ring"]],  # Barber Todd
@@ -1122,6 +1179,18 @@ class Scene_Map < Scene_Base
             $ap_pending_deathlinks.pop(true) rescue nil
             $game_map.interpreter.setup($data_common_events[Game_Interpreter::DEATH_LINK_COMMON_EVENT_ID].list)
         end
+
+        (1..10).each do |n|
+            BS2Randomizer.check_locked_variable_trigger(11, n, "Crash Chamber: Progression #{n}")
+        end
+
+        unless defined?($ap_endings_unlock_set) && $ap_endings_unlock_set
+            if defined?($game_switches) && $game_switches && defined?($game_variables) && $game_variables
+                $game_switches[4] = true
+                $game_variables[9] = [$game_variables[9].to_i, 1].max
+                $ap_endings_unlock_set = true
+            end
+        end
     end
 end
 
@@ -1151,7 +1220,17 @@ class Game_Interpreter
     }
     AP_CLIENT_STATUS_GOAL = 30
 
+    ENDING_G_TRIGGER = {map_id: 187, event_id: 6, switch_id: 513}
+
     def command_121
+        trigger = ENDING_G_TRIGGER
+        if BS2Randomizer.map_id(self) == trigger[:map_id] &&
+           instance_variable_get(:@event_id) == trigger[:event_id] &&
+           @params[0] <= trigger[:switch_id] && trigger[:switch_id] <= @params[1] &&
+           @params[2] == 0
+            ArchipelagoLocations.send_check("Crash Chamber: Ending G Achieved")
+        end
+
         triggers = ENDING_TRIGGERS[$ap_goal] || []
         triggers.each do |trigger|
             next unless BS2Randomizer.map_id(self) == trigger[:map_id]
@@ -1167,6 +1246,9 @@ class Game_Interpreter
     end
 
     def command_201
+
+        BS2Randomizer.check_locked_door_transfer_trigger(self)
+
         if !BS2Randomizer.intro_map?(self) && BS2Randomizer.enabled?("room_transition_randomization") && @params[0] == 0
             destination = BS2Randomizer.shuffled_destination(self, @params)
             if destination
@@ -1184,9 +1266,14 @@ class Game_Interpreter
 
     def command_301
         if !BS2Randomizer.intro_map?(self) && BS2Randomizer.enabled?("enemy_randomization")
-            original_id = BS2Randomizer.original_troop_id(self)
-            $ap_pending_arena_soul_troop_id =
-                BS2Randomizer::BOSS_SOUL_TROOP_TRIGGERS.key?(original_id) ? original_id : nil
+
+            if BS2Randomizer::BOSS_ARENA_MAP_IDS.include?(BS2Randomizer.map_id(self))
+                original_id = BS2Randomizer.original_troop_id(self)
+                $ap_pending_arena_soul_troop_id =
+                    BS2Randomizer::BOSS_SOUL_TROOP_TRIGGERS.key?(original_id) ? original_id : nil
+            else
+                $ap_pending_arena_soul_troop_id = nil
+            end
             troop_id = BS2Randomizer.random_troop(self)
             if troop_id
                 original = @params

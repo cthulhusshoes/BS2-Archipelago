@@ -8,9 +8,6 @@
   "Mosquito Ring": [
     "ASH: Mosquito Ring"
   ],
-  "Covenant: Maid Victoria": [
-    "ASH: Covenant: Maid Victoria"
-  ],
   "Cannon": [
     "BFM: Cannon"
   ],
@@ -47,15 +44,6 @@
   ],
   "Warrior's Armor": [
     "BFM: Warrior's Armor"
-  ],
-  "Covenant: Mock Turtle": [
-    "BoG: Covenant: Mock Turtle"
-  ],
-  "Mist Billingsgate Fish Market": [
-    "Billingsgate Fish Market: Mist Billingsgate Fish Market"
-  ],
-  "Mist Black Knight Arena": [
-    "Black Knight Arena: Mist Black Knight Arena"
   ],
   "Cannibal's Shield": [
     "BoG: Cannibal's Shield"
@@ -108,9 +96,6 @@
   "Soul of the Jabberwock": [
     "CR: Soul of the Jabberwock"
   ],
-  "Mist Crash Chamber": [
-    "Crash Chamber: Mist Crash Chamber"
-  ],
   "Almighty Ring": [
     "Crimean Nursing Graveyard: Almighty Ring"
   ],
@@ -125,9 +110,6 @@
   ],
   "Miracle [Summon Wall of Flesh]": [
     "Crimean Nursing Graveyard: Miracle [Summon Wall of Flesh]"
-  ],
-  "Mist Crimean Nursing Graveyard": [
-    "Crimean Nursing Graveyard: Mist Crimean Nursing Graveyard"
   ],
   "Sorcery [Acid Rain]": [
     "Crimean Nursing Graveyard: Sorcery [Acid Rain]"
@@ -204,21 +186,6 @@
   "Blackbeard's Ring": [
     "Deep Sea: Blackbeard's Ring"
   ],
-  "Covenant: Kuti": [
-    "Deep Sea: Covenant: Kuti"
-  ],
-  "Mist Deep Sea": [
-    "Deep Sea: Mist Deep Sea"
-  ],
-  "Mist Dodgson Bridge": [
-    "Dodgson Bridge: Mist Dodgson Bridge"
-  ],
-  "Mist Duchess' Mansion": [
-    "Duchess' Mansion: Mist Duchess' Mansion"
-  ],
-  "Covenant: Hatta": [
-    "Endless Tea Party: Covenant: Hatta"
-  ],
   "Armor of the Sun": [
     "FF: Armor of the Sun"
   ],
@@ -249,18 +216,6 @@
   ],
   "Fairy Tale [Pinocchio]": [
     "Fairy Tale [Pinocchio]"
-  ],
-  "Mist Florence Arena": [
-    "Florence Arena: Mist Florence Arena"
-  ],
-  "Covenant: Bandersnatch": [
-    "FF: Covenant: Bandersnatch"
-  ],
-  "Mist Fuming Forest": [
-    "Fuming Forest: Mist Fuming Forest"
-  ],
-  "Covenant: Queen of Hearts": [
-    "Garden of the Heart: Covenant: Queen of Hearts"
   ],
   "Fairy Tale [The Fox and The Grapes]": [
     "GotH: Fairy Tale [The Fox and The Grapes]"
@@ -307,15 +262,6 @@
   ],
   "Wonder Hat": [
     "IF: Wonder Hat"
-  ],
-  "Mist Infinite Food": [
-    "Infinite Food: Mist Infinite Food"
-  ],
-  "Mist Jabberwock's Lair": [
-    "Jabberwock's Lair: Mist Jabberwock's Lair"
-  ],
-  "Mist Jubjub's Nest": [
-    "Jubjub's Nest: Mist Jubjub's Nest"
   ],
   "Cloak of Shadows": [
     "LC: Cloak of Shadows"
@@ -476,15 +422,6 @@
   "Soul of Distraction": [
     "LT: Soul of Distraction"
   ],
-  "Covenant: Node": [
-    "LD: Covenant: Node"
-  ],
-  "Mist Library Dream": [
-    "LD: Mist Library Dream"
-  ],
-  "Mist Liddell Cemetary": [
-    "LC: Mist Liddell Cemetary"
-  ],
   "Halberd": [
     "MV: Halberd"
   ],
@@ -533,15 +470,6 @@
   ],
   "Toto's Ring": [
     "MW: Toto's Ring"
-  ],
-  "Covenant: Tweedledee & Tweedledum": [
-    "MW: Covenant: Tweedledee & Tweedledum"
-  ],
-  "Mist Mental Ward": [
-    "MW: Mist Mental Ward"
-  ],
-  "Mist Mushroom Village": [
-    "Mushroom Village: Mist Mushroom Village"
   ],
   "Angel's Raiment": [
     "NF: Angel's Raiment"
@@ -622,12 +550,6 @@
   "Soul of the Dean": [
     "OWU: Soul of the Dean"
   ],
-  "Mist Ox Ward University": [
-    "Ox Ward University: Mist Ox Ward University"
-  ],
-  "Covenant: Walrus": [
-    "Oysters' Rotted Sea: Covenant: Walrus"
-  ],
   "Blade Shield": [
     "PoBT: Blade Shield"
   ],
@@ -682,12 +604,6 @@
   "Hornet Ring": [
     "PoF: Hornet Ring"
   ],
-  "Covenant: Dodo": [
-    "PoBT: Covenant: Dodo"
-  ],
-  "Mist Pond of Bloody Tears": [
-    "PoBT: Mist Pond of Bloody Tears"
-  ],
   "Fairy Tale [Daddy-Long-Legs]": [
     "QL: Fairy Tale [Daddy-Long-Legs]"
   ],
@@ -714,12 +630,6 @@
   ],
   "Soul of the Slave Empress": [
     "QL: Soul of the Slave Empress"
-  ],
-  "Covenant: Best Girl Prickett": [
-    "QL: Covenant: Best Girl Prickett"
-  ],
-  "Mist Queensland": [
-    "QL: Mist Queensland"
   ],
   "Armor of Milton": [
     "RCF: Armor of Milton"
@@ -810,15 +720,6 @@
   ],
   "Sorcery [Phalanx]": [
     "RH: Sorcery [Phalanx]"
-  ],
-  "Mist Red Castle Frissel": [
-    "Red Castle Frissel: Mist Red Castle Frissel"
-  ],
-  "Covenant: Bill": [
-    "RGC: Covenant: Bill"
-  ],
-  "Mist Riverside": [
-    "CR: Mist Riverside"
   ],
   "Armor of the Abyss": [
     "SCT: Armor of the Abyss"
@@ -916,15 +817,6 @@
   "Soul of the God's Odd Fish": [
     "Ship Graveyard: Soul of the God's Odd Fish"
   ],
-  "Mist Sick Clock Tower": [
-    "Sick Clock Tower: Mist Sick Clock Tower"
-  ],
-  "Mist Slaughterhouse": [
-    "Slaughterhouse: Mist Slaughterhouse"
-  ],
-  "Mist Spore Forest": [
-    "SF: Mist Spore Forest"
-  ],
   "Barber's Ring": [
     "ULT: Barber's Ring"
   ],
@@ -955,9 +847,6 @@
   "Soul of Jack": [
     "ULT: Soul of Jack"
   ],
-  "Mist Upper Lutwidge Town": [
-    "ULT: Mist Upper Lutwidge Town"
-  ],
   "Black Knight's Ring": [
     "White Castletown: Black Knight's Ring"
   ],
@@ -972,9 +861,6 @@
   ],
   "Lion's Ring": [
     "White Castletown: Lion's Ring"
-  ],
-  "Mist White Castletown": [
-    "White Castletown: Mist White Castletown"
   ],
   "Ring of The Indomitable": [
     "White Castletown: Ring of The Indomitable"
@@ -1000,12 +886,6 @@
   "Winter Witch's Coat": [
     "White Castletown: Winter Witch's Coat"
   ],
-  "Covenant: Sho": [
-    "Windless Valley: Covenant: Sho"
-  ],
-  "Mist Windless Valley": [
-    "Windless Valley: Mist Windless Valley"
-  ],
   "Old King's Ring": [
     "Winterbell: Old King's Ring"
   ],
@@ -1029,5 +909,11 @@
   ],
   "Sorcery [Stone Flesh]": [
     "LD: Sorcery [Stone Flesh] (exchange for Soul of the Old Knight)"
+  ],
+  "Drink Me": [
+    "CC: Drink Me"
+  ],
+  "Eat Me": [
+    "CC: Eat Me"
   ]
 }
