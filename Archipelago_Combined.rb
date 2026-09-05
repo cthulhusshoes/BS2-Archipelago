@@ -106,8 +106,6 @@
         "Herb Flask",
         "Herb Flask (M)",
         "Bloody Key",
-        "Drink Me",
-        "Eat Me",
         "Lamp Spark",
     ]
 
@@ -705,12 +703,12 @@ module BS2Randomizer
     MIST_FOG_WALL_INTERACT_TRIGGERS = {
         [52, 22] => ['Mist Crash Chamber', 'Crash Chamber: Mist Crash Chamber'],
         [181, 6] => ['Mist Library Dream', 'LD: Mist Library Dream'],
-        [58, 8] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
-        [58, 9] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
-        [58, 10] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
-        [58, 11] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
-        [58, 12] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
-        [58, 13] => ['Mist Dodgson Bridge', 'Dodgson Bridge: Mist Dodgson Bridge'],
+        [58, 8] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
+        [58, 9] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
+        [58, 10] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
+        [58, 11] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
+        [58, 12] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
+        [58, 13] => ['Mist Dodgson Bridge', 'LT: Mist Dodgson Bridge'],
         [33, 72] => ['Mist Liddell Cemetary', 'LC: Mist Liddell Cemetary'],
         [65, 60] => ['Mist Pond of Bloody Tears', 'PoBT: Mist Pond of Bloody Tears'],
         [85, 2] => ['Mist Mental Ward', 'MW: Mist Mental Ward'],
@@ -806,9 +804,7 @@ module BS2Randomizer
     end
 
     #--------------------------------------------------------------------
-    #--------------------------------------------------------------------
     # ** Boss arena maps
-    #--------------------------------------------------------------------
     #--------------------------------------------------------------------
     BOSS_ARENA_MAP_IDS = [
         58,   # Dodgson Bridge
@@ -840,18 +836,23 @@ module BS2Randomizer
     ]
 
     LOCKED_DOOR_TRANSFER_TRIGGERS = {
-        [51, 3] => "Crash Chamber: Entered Rabbit Hole",
+        [51, 3] => {location: "Crash Chamber: Entered Rabbit Hole", requires_switch: nil},
+        [9, 11] => {location: "OWU: Through Oxward Gate", requires_switch: 390},
+        [65, 4] => {location: "PoBT: Door to Elizabeth", requires_switch: nil},
+        [6, 3] => {location: "LT: Door to PoF", requires_switch: nil},
     }
 
     def self.check_locked_door_transfer_trigger(interpreter)
         key = [map_id(interpreter), interpreter.instance_variable_get(:@event_id)]
-        location_name = LOCKED_DOOR_TRANSFER_TRIGGERS[key]
-        ArchipelagoLocations.send_check(location_name) if location_name
+        entry = LOCKED_DOOR_TRANSFER_TRIGGERS[key]
+        return unless entry
+        return if entry[:requires_switch] && !(defined?($game_switches) && $game_switches && $game_switches[entry[:requires_switch]])
+        ArchipelagoLocations.send_check(entry[:location])
     end
 
     #--------------------------------------------------------------------
     # ** Locked game-variable-threshold checks
-    #--------------------------------------------------------------------
+    #----------------------------------------------------------------------
     def self.check_locked_variable_trigger(variable_id, threshold, location_name)
         return unless defined?($game_variables) && $game_variables && $game_variables[variable_id].to_i >= threshold
         ArchipelagoLocations.send_check(location_name)
@@ -865,7 +866,7 @@ module BS2Randomizer
         30 => [['Fairy Tale Scrap Two', 'LT: Fairy Tale Scrap Two']],
         31 => [['Fairy Tale Scrap One', 'ULT: Fairy Tale Scrap One']],
         32 => [['Fairy Tale Scrap Three', 'LT: Fairy Tale Scrap Three']],
-        174 => [['Soul of the Head-Hunting Beast', 'CC: Soul of the Head-Hunting Beast']],
+        174 => [['Soul of the Head-Hunting Beast', 'CC: Soul of the Head-Hunting Beast'], ['Soul of the Dragon Hunter', 'CC: Soul of the Dragon Hunter']],
         175 => [['Soul of Distraction', 'LT: Soul of Distraction']],
         178 => [['Soul of the Pregnant Cake', 'IF: Soul of the Pregnant Cake']],
         179 => [['Soul of the Bellcaller', 'BFM: Soul of the Bellcaller']],
@@ -975,7 +976,49 @@ module BS2Randomizer
         data ? data.price : 0
     end
 
+    SHOP_ENTRY_PROTECTED = {
+        [101, 5] => ["Master Key"],
+    }
+
+    def self.shop_entry_protected?(entry)
+        protected_names = SHOP_ENTRY_PROTECTED[[$ap_current_shop_map_id, $ap_current_shop_event_id]]
+        return false unless protected_names
+        type_code, item_id = entry[0], entry[1]
+        kind = case type_code
+               when 0 then "item"
+               when 1 then "weapon"
+               when 2 then "armor"
+               end
+        protected_names.include?(display_name(kind, item_id))
+    end
+
+    SHOP_ENTRY_FORCED_PRESENT = {
+        [101, 5] => ["Master Key"],
+    }
+
+    def self.find_item_id_by_name(name)
+        $data_items.each_with_index do |item, idx|
+            return idx if item && item.name == name
+        end
+        nil
+    end
+
+    def self.inject_forced_shop_entries(map_id, event_id, goods)
+        forced_names = SHOP_ENTRY_FORCED_PRESENT[[map_id, event_id]]
+        return goods unless forced_names
+        present_names = goods.map { |e| display_name("item", e[1]) if e[0] == 0 }.compact
+        missing = forced_names - present_names
+        return goods if missing.empty?
+        injected = missing.map do |name|
+            item_id = find_item_id_by_name(name)
+            next nil unless item_id
+            [0, item_id, 0, $data_items[item_id].price]
+        end.compact
+        goods + injected
+    end
+
     def self.shuffled_shop_entry(entry)
+        return entry if shop_entry_protected?(entry)
         pool = shop_replacement_pool
         return entry if pool.empty?
         type_code, item_id = entry[0], entry[1]
@@ -993,6 +1036,7 @@ module BattleManager
         def process_victory
             troop_id = $game_troop.instance_variable_get(:@troop_id) if defined?($game_troop) && $game_troop
             BS2Randomizer.grant_boss_souls_for_troop(troop_id) if troop_id
+
             if defined?($ap_pending_arena_soul_troop_id) && $ap_pending_arena_soul_troop_id
                 BS2Randomizer.grant_boss_souls_for_troop($ap_pending_arena_soul_troop_id)
                 $ap_pending_arena_soul_troop_id = nil
@@ -1139,6 +1183,12 @@ class Game_Interpreter
     def command_302
         map_id = $game_map ? $game_map.map_id : nil
         $ap_shop_randomization_excluded = BS2Randomizer.shop_excluded?(map_id, @event_id)
+        # Captured here (not available at all within Scene_Shop#prepare
+        # itself, which runs later from a different context) so
+        # shuffled_shop_entry can check per-slot protections below.
+        $ap_current_shop_map_id = map_id
+        $ap_current_shop_event_id = @event_id
+        puts "[Archipelago_Combined][DEBUG] Shop opened: map_id=#{map_id}, event_id=#{@event_id}"
         bs2r9_command_302
     end
 
@@ -1181,15 +1231,12 @@ class Scene_Map < Scene_Base
         end
 
         (1..10).each do |n|
-            BS2Randomizer.check_locked_variable_trigger(11, n, "Crash Chamber: Progression #{n}")
+            BS2Randomizer.check_locked_variable_trigger(11, n, "LD: Progression #{n}")
         end
 
-        unless defined?($ap_endings_unlock_set) && $ap_endings_unlock_set
-            if defined?($game_switches) && $game_switches && defined?($game_variables) && $game_variables
-                $game_switches[4] = true
-                $game_variables[9] = [$game_variables[9].to_i, 1].max
-                $ap_endings_unlock_set = true
-            end
+        prevent_covenant_purge = defined?($ap_prevent_covenant_purge) ? $ap_prevent_covenant_purge : true
+        if prevent_covenant_purge && defined?($game_variables) && $game_variables && $game_variables[11].to_i >= 10
+            $game_switches[602] = true
         end
     end
 end
@@ -1219,6 +1266,7 @@ class Game_Interpreter
         ],
     }
     AP_CLIENT_STATUS_GOAL = 30
+
 
     ENDING_G_TRIGGER = {map_id: 187, event_id: 6, switch_id: 513}
 
@@ -1308,6 +1356,8 @@ class Game_Interpreter
                     name = BS2Randomizer.ap_location_name("item", BS2Randomizer.map_id(self), @params[0].to_i)
                     if name
                         ArchipelagoLocations.send_check(name)
+                        vanilla_name = BS2Randomizer.display_name("item", @params[0].to_i)
+                        bs2r4_command_126 if ["Drink Me", "Eat Me"].include?(vanilla_name)
                         return true
                     end
                     if BS2Randomizer.region_pool("item", BS2Randomizer.map_id(self)).include?(@params[0].to_i)
@@ -1410,9 +1460,13 @@ end
 class Scene_Shop < Scene_MenuBase
     alias bs2r5_prepare prepare
     def prepare(goods, purchase_only)
+        kind_name = ->(tc) { case tc; when 0 then "item"; when 1 then "weapon"; when 2 then "armor"; end }
+        puts "[Archipelago_Combined][DEBUG] Shop goods BEFORE: " + goods.map { |e| "#{BS2Randomizer.display_name(kind_name.call(e[0]), e[1])} (type=#{e[0]}, id=#{e[1]})" }.join(", ")
+        goods = BS2Randomizer.inject_forced_shop_entries($ap_current_shop_map_id, $ap_current_shop_event_id, goods)
         if BS2Randomizer.enabled?("shop_item_randomization") && !$ap_shop_randomization_excluded
             goods = goods.map { |entry| BS2Randomizer.shuffled_shop_entry(entry) }
         end
+        puts "[Archipelago_Combined][DEBUG] Shop goods AFTER: " + goods.map { |e| "#{BS2Randomizer.display_name(kind_name.call(e[0]), e[1])} (type=#{e[0]}, id=#{e[1]})" }.join(", ")
         bs2r5_prepare(goods, purchase_only)
     end
 end
@@ -1476,6 +1530,12 @@ end
         $archipelago.add_listener("Connected") do |msg|
             $ap_goal = (msg["slot_data"] || {})["goal"] || "true_ending"
             $ap_death_link_enabled = (msg["slot_data"] || {})["death_link"] == true
+            # Defaults to true (matching the YAML option's own default) if
+            # somehow missing from slot_data, rather than silently treating
+            # an old/incompatible server response as "off".
+            slot_data = msg["slot_data"] || {}
+            $ap_auto_meet_red_hood = slot_data.key?("auto_meet_red_hood") ? slot_data["auto_meet_red_hood"] == true : true
+            $ap_prevent_covenant_purge = slot_data.key?("prevent_covenant_purge") ? slot_data["prevent_covenant_purge"] == true : true
             if $ap_death_link_enabled && !$ap_tags.include?("DeathLink")
                 $ap_tags << "DeathLink"
                 connect_update_packet = [{
@@ -1592,6 +1652,13 @@ end
             $game_troop         = contents[:troop]
             $game_map           = contents[:map]
             $game_player        = contents[:player]
+
+            auto_meet_red_hood = defined?($ap_auto_meet_red_hood) ? $ap_auto_meet_red_hood : true
+            if auto_meet_red_hood
+                $game_switches[14] = true
+                $game_variables[9] = [$game_variables[9].to_i, 1].max
+                $game_switches[178] = true
+            end
             if $load_autoconnect && contents[:AP_connect_info]
                 $archipelago.connect_info = contents[:AP_connect_info]
                 config_path = File.join(Dir.pwd, "archipelago.json")
@@ -1613,6 +1680,21 @@ end
             $archipelago.connect if $load_autoconnect
         rescue
             false
+        end
+
+        class << self
+            alias bs2r_setup_new_game setup_new_game
+            def setup_new_game
+                bs2r_setup_new_game
+                # New-game counterpart to the extract_save_contents force
+                # above -- see the comment there for the full reasoning.
+                auto_meet_red_hood = defined?($ap_auto_meet_red_hood) ? $ap_auto_meet_red_hood : true
+                if auto_meet_red_hood
+                    $game_switches[14] = true
+                    $game_variables[9] = [$game_variables[9].to_i, 1].max
+                    $game_switches[178] = true
+                end
+            end
         end
     end
 
